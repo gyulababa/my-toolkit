@@ -93,6 +93,22 @@ A convention is used for JSON configs and templates:
 The `helpers/catalogloader/` helpers standardize loading, validation, and persistence in these layouts.
 
 
+CSV Cleaner Recipes
+
+The CSV cleaner scripts use a CatalogLoader-backed recipes config at `scripts/CSVcleaner/recipes.json`.
+Schema shape:
+- `vars`: string map used for `${VAR}` expansion in default paths.
+- `recipes`: list of recipe objects (`id`, `description`, `input_default`, `output_default`, `keep`, `rename`, `html_col`, `meta_cols`).
+- `quickruns`: mapping of quickrun id to recipe id list (old list shape is still accepted).
+
+Resolution rules:
+- `${VAR}` placeholders expand from `vars`.
+- Environment overrides take precedence via `OPS_<VAR>` (e.g. `OPS_DATA_DIR`).
+
+Validation is performed via `CSVcleaner.recipes_catalog_loader.RECIPES_LOADER` before running recipes.
+Quickrun results can be persisted by supplying `--persist-root` to `cleaner_runner.py`, which writes a run report under the `cleaning_runs` domain using `helpers.persist`.
+
+
 Usage Examples
 
 Load a JSON config safely:
