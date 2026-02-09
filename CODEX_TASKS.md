@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0112 STATUS=TODO TYPE=refactor SCOPE=services/vision/viewport_compositor.py VERIFY="pytest -q" DESC="Relocate ViewportCompositor to app/adapters/dearpygui/vision and update all imports"
 - [ ] ID=T0113 STATUS=TODO TYPE=fix SCOPE=helpers/vision/transforms.py VERIFY="pytest -q" DESC="Fix crop rect parameter contract mismatch by supporting xywh_norm or converting rect_norm [x,y,w,h] to xyxy before crop"
 - [ ] ID=T0114 STATUS=TODO TYPE=test SCOPE=tests/vision/test_transforms_crop.py VERIFY="pytest -q" DESC="Add unit tests covering crop rect normalization for both rect_norm (xywh) and xyxy semantics"
 - [ ] ID=T0115 STATUS=TODO TYPE=fix SCOPE=services/vision/layers_service.py VERIFY="pytest -q" DESC="Fix malformed import line(s) and ensure module imports cleanly without stray artifacts"
