@@ -8,7 +8,7 @@ from helpers.history.ops import Operation, OpMeta
 from helpers.history.history import History
 from helpers.history.applier_tree import TreeApplier
 
-from helpers.geometry import (
+from helpers.geometry.rect import (
     normalize_xyxy,
     clamp_xyxy_to_bounds,
     clamp_xyxy_preserve_size,
