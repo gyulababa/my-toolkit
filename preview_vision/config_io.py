@@ -12,6 +12,7 @@ from helpers.validation import ValidationError
 from helpers.vision.config.schema import VisionConfig, ensure_vision_config
 from helpers.vision.drivers import make_source
 from helpers.vision.source import FrameSource
+from services.vision.interfaces import CaptureConfigBuilder, FrameSourceBuilder, VisionConfigLoader
 
 
 @dataclass(frozen=True)
@@ -45,3 +46,12 @@ def capture_config_from_vision(cfg: VisionConfig) -> CaptureConfig:
 def build_source_from_config(cfg: CaptureConfig) -> FrameSource:
     """Instantiate a FrameSource using the helpers.vision.drivers registry."""
     return make_source(cfg.driver, cfg.params)
+
+
+def build_preview_wiring() -> tuple[VisionConfigLoader, CaptureConfigBuilder, FrameSourceBuilder]:
+    """
+    Return the config IO wiring for preview apps.
+
+    This keeps config IO ownership in preview_vision and allows services to use injection.
+    """
+    return load_vision_config, capture_config_from_vision, build_source_from_config

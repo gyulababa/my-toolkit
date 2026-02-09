@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any, Dict
 
 from helpers.runtime.optional_imports import require
-from preview_vision.config_io import build_source_from_config, capture_config_from_vision, load_vision_config
+from preview_vision.config_io import build_preview_wiring
 from services.vision.preview_session import VisionPreviewSession
 
 from app.adapters.dearpygui.vision.stage_surface import StageSurface, StageSurfaceSpec
@@ -43,12 +43,13 @@ def main() -> int:
     dpg = require("dearpygui.dearpygui", pip_hint="dearpygui", purpose="Vision preview UI")
 
     args = parse_args()
+    load_config, capture_config, build_source = build_preview_wiring()
     session = VisionPreviewSession(
         config_path=Path(args.config),
         runner_fps=args.runner_fps,
-        load_config=load_vision_config,
-        capture_config=capture_config_from_vision,
-        build_source=build_source_from_config,
+        load_config=load_config,
+        capture_config=capture_config,
+        build_source=build_source,
     )
 
     repo_root = _repo_root_from_this_file()
