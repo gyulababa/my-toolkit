@@ -62,3 +62,4 @@ Codex must:
 - [x] ID=T0117 STATUS=DONE TYPE=refactor SCOPE=services/vision/catalog_seed.py VERIFY="pytest -q" DESC="Move repo-layout-dependent seed loader out of services and make seeding accept explicit helpers_root if kept reusable" COMMIT=dc9423e DATE=2026-02-09
 - [x] ID=T0118 STATUS=DONE TYPE=refactor SCOPE=preview_vision/config_io.py VERIFY="pytest -q" DESC="Make preview_vision the sole owner of config IO wiring and pass built sources/config into services via injection" COMMIT=ee275ea DATE=2026-02-09
 - [x] ID=T0119 STATUS=DONE TYPE=doc SCOPE=HELPERS_API.md VERIFY="pytest -q" DESC="Document layering rule that services must not import apps and GUI adapters must live outside services" COMMIT=350c306 DATE=2026-02-09
+- [x] ID=T0120 STATUS=DONE TYPE=doc SCOPE=services/vision/dpg_texture_pool.py VERIFY="pytest -q" DESC="Document TextureRef lifetime and resize retag behavior to prevent stale texture tag caching" COMMIT=b52ff65 DATE=2026-02-09
