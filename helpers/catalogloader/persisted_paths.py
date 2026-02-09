@@ -3,13 +3,15 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from helpers.fs.paths import join_safe
+
 
 def domain_root(persist_root: Path, domain: str) -> Path:
-    return Path(persist_root) / domain
+    return join_safe(persist_root, domain)
 
 
 def index_path(persist_root: Path, domain: str) -> Path:
-    return domain_root(persist_root, domain) / "index.json"
+    return join_safe(domain_root(persist_root, domain), "index.json")
 
 
 def docs_root(persist_root: Path, domain: str) -> Path:
@@ -42,7 +44,7 @@ def revisions_dir(persist_root: Path, domain: str, doc_id: str) -> Path:
 
 
 def doc_path(persist_root: Path, domain: str, doc_id: str) -> Path:
-    return domain_root(persist_root, domain) / f"{doc_id}.json"
+    return join_safe(domain_root(persist_root, domain), f"{doc_id}.json")
 
 
 def revision_path(persist_root: Path, domain: str, doc_id: str) -> Path:
