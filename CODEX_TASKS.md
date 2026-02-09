@@ -30,7 +30,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 
 
-- [ ] ID=T0141 STATUS=TODO TYPE=refactor SCOPE=helpers/transforms/imaging/crop.py VERIFY="pytest -q" DESC="Add crop_rect_xywh_norm_np wrapper to support rect_norm [x,y,w,h] by converting to xyxy and delegating to crop_rect_norm_np"
 - [ ] ID=T0142 STATUS=TODO TYPE=test SCOPE=tests/transforms/imaging/test_crop_rect_norm.py VERIFY="pytest -q" DESC="Add tests for crop_rect_norm_np and new xywh wrapper including clamping, empty crop policy, and xywh-to-xyxy conversion"
 - [ ] ID=T0143 STATUS=TODO TYPE=refactor SCOPE=helpers/zones/editor.py VERIFY="pytest -q" DESC="Add ZonesEditor helper to coalesce geometry drag updates using coalesce_key while keeping History patch paths stable"
 
