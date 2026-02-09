@@ -53,3 +53,4 @@ Codex must:
 - [x] ID=T0108 STATUS=DONE TYPE=fix SCOPE=services/vision/preview_session.py VERIFY="pytest -q" DESC="Remove services->preview_vision import by injecting config/source builder callables into VisionPreviewSession" COMMIT=6e73069 DATE=2026-02-09
 - [x] ID=T0109 STATUS=DONE TYPE=refactor SCOPE=services/vision VERIFY="pytest -q" DESC="Introduce services.vision interfaces/types for FrameSource factory and config loader to keep preview app as wiring only" COMMIT=f734197 DATE=2026-02-09
 - [x] ID=T0110 STATUS=DONE TYPE=refactor SCOPE=services/vision/dpg_* VERIFY="pytest -q" DESC="Move DearPyGui-specific modules out of services/vision into app/adapters/dearpygui/vision" COMMIT=4bbd763 DATE=2026-02-09
+- [x] ID=T0111 STATUS=DONE TYPE=refactor SCOPE=services/vision/stage_surface.py VERIFY="pytest -q" DESC="Relocate StageSurface to app/adapters/dearpygui/vision and update all imports" COMMIT=fc885d7 DATE=2026-02-09
