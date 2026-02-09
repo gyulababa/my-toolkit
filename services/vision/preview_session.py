@@ -198,7 +198,7 @@ class VisionPreviewSession:
                     raise ValidationError("crop_rect_norm requires params.rect_norm=[x,y,w,h]")
                 r = tuple(float(x) for x in rect)
                 # capture r by value
-                out.append(lambda fr, r=r: crop_rect_norm(fr, xyxy_norm=r))
+                out.append(lambda fr, r=r: crop_rect_norm(fr, rect_norm=r))
 
             elif name == "resize_max":
                 max_w = params.get("max_w")
