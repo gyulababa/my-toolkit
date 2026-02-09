@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0109 STATUS=TODO TYPE=refactor SCOPE=services/vision VERIFY="pytest -q" DESC="Introduce services.vision interfaces/types for FrameSource factory and config loader to keep preview app as wiring only"
 - [ ] ID=T0110 STATUS=TODO TYPE=refactor SCOPE=services/vision/dpg_* VERIFY="pytest -q" DESC="Move DearPyGui-specific modules out of services/vision into app/adapters/dearpygui/vision"
 - [ ] ID=T0111 STATUS=TODO TYPE=refactor SCOPE=services/vision/stage_surface.py VERIFY="pytest -q" DESC="Relocate StageSurface to app/adapters/dearpygui/vision and update all imports"
 - [ ] ID=T0112 STATUS=TODO TYPE=refactor SCOPE=services/vision/viewport_compositor.py VERIFY="pytest -q" DESC="Relocate ViewportCompositor to app/adapters/dearpygui/vision and update all imports"
