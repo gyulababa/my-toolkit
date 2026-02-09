@@ -167,10 +167,10 @@ class ZonesEditor:
         Set geometry to rect_px. Optionally clamps to frame_size (width,height).
         If coalesce=True, emits a stable coalesce_key for drag updates.
         """
-        x0, y0, x1, y1 = normalize_rect_px(xyxy)
+        x0, y0, x1, y1 = normalize_xyxy(xyxy)
         if frame_size is not None:
             w, h = frame_size
-            x0, y0, x1, y1 = clamp_rect_px((x0, y0, x1, y1), width=w, height=h)
+            x0, y0, x1, y1 = clamp_xyxy_to_bounds((x0, y0, x1, y1), w=w, h=h)
 
         new_geom = {"type": "rect_px", "xyxy": [int(x0), int(y0), int(x1), int(y1)]}
         path = _zone_path(preset_id, zone_key, "geometry")
