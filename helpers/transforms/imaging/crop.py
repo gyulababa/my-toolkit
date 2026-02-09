@@ -65,3 +65,13 @@ def crop_rect_norm_np(img: np.ndarray, xyxy_norm: Iterable[float]) -> np.ndarray
     y0 = y0n * h
     y1 = y1n * h
     return crop_xyxy_px_np(img, (x0, y0, x1, y1))
+
+
+def crop_rect_xywh_norm_np(img: np.ndarray, rect_norm: Iterable[float]) -> np.ndarray:
+    """
+    Crop an image using normalized rect [x, y, w, h] (0..1).
+
+    Delegates to crop_rect_norm_np after converting to xyxy.
+    """
+    x, y, w, h = rect_norm
+    return crop_rect_norm_np(img, (x, y, x + w, y + h))
