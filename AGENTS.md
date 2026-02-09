@@ -70,7 +70,7 @@ Never mix behavior change with refactor in the same commit.
 # 2.a Commit SHA Registry Rule
 
 Allowed:
-- exactly one `git commit --amend --no-edit` per task, solely to inject COMMIT=<sha> into registry/history task lines
+- up to two `git commit --amend --no-edit` per task, solely to inject or correct COMMIT=<sha> in registry/history task lines
 
 Not allowed:
 - any other amendments
