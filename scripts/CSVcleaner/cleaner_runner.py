@@ -5,273 +5,25 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
-import os
-import re
 import sys
-from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Mapping, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
-from helpers.catalog import Catalog, EditableCatalog
-from helpers.persist.catalog_loader import CatalogLoader
 from helpers.validation import ValidationError
 
-try:
-    from CSVcleaner.run_report import CleaningRunReport, RUN_REPORT_PERSIST
-except ModuleNotFoundError:
-    from run_report import CleaningRunReport, RUN_REPORT_PERSIST
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from app.adapters.csvcleaner.recipes import (  # noqa: E402
+    CleaningRecipesResolved,
+    RecipeResolved,
+    load_recipes_resolved,
+)
+from app.adapters.csvcleaner.run_reports import persist_quickrun_report  # noqa: E402
 
 # Keep your default script logic
 CLEANER_SCRIPT_DEFAULT = str(Path(__file__).resolve().parent.parent / "clean_csv_generic.py")
-
-_VAR_PATTERN = re.compile(r"\$\{([A-Z0-9_]+)\}")
-
-
-def _expand_vars(s: str, vars_map: Mapping[str, str]) -> str:
-    def repl(m: re.Match[str]) -> str:
-        key = m.group(1)
-        return str(vars_map.get(key, m.group(0)))
-    return _VAR_PATTERN.sub(repl, s)
-
-
-def _normalize_list(v: Any) -> List[str]:
-    if v is None:
-        return []
-    if isinstance(v, list):
-        return [str(x) for x in v if str(x).strip()]
-    if isinstance(v, str):
-        return [x.strip() for x in v.split(",") if x.strip()]
-    return [str(v)]
-
-
-@dataclass(frozen=True)
-class RecipeSpec:
-    id: str
-    description: str = ""
-    input_default: str = ""
-    output_default: str = ""
-    keep: List[str] = None  # type: ignore[assignment]
-    rename: Dict[str, str] = None  # type: ignore[assignment]
-    html_col: str = ""
-    meta_cols: List[str] = None  # type: ignore[assignment]
-
-    def __post_init__(self) -> None:
-        object.__setattr__(self, "keep", self.keep or [])
-        object.__setattr__(self, "rename", self.rename or {})
-        object.__setattr__(self, "meta_cols", self.meta_cols or [])
-
-
-@dataclass(frozen=True)
-class CleaningRecipesDoc:
-    """
-    Persistable, schema-validated config doc for CSV cleaning recipes.
-    Store this via CatalogLoader (and optionally PersistedCatalogLoader).
-    """
-    vars: Dict[str, str]
-    recipes: List[RecipeSpec]
-    quickruns: Dict[str, List[str]]  # quickrun_id -> recipe_ids
-
-    def resolve(self, *, env_prefix: str = "OPS_") -> "CleaningRecipesResolved":
-        """
-        Apply env overrides and ${VAR} expansion to defaults.
-        """
-        vars_map = dict(self.vars)
-
-        # Allow env overrides: OPS_DATA_DIR overrides vars["DATA_DIR"], etc.
-        for k in list(vars_map.keys()):
-            env_k = f"{env_prefix}{k}"
-            if env_k in os.environ:
-                vars_map[k] = os.environ[env_k]
-
-        def expand(x: str) -> str:
-            return _expand_vars(str(x), vars_map)
-
-        resolved_recipes: Dict[str, RecipeResolved] = {}
-        for r in self.recipes:
-            rid = str(r.id).strip()
-            if not rid:
-                raise ValidationError("recipes[].id must be non-empty")
-            if rid in resolved_recipes:
-                raise ValidationError(f"Duplicate recipe id: {rid}")
-
-            resolved_recipes[rid] = RecipeResolved(
-                id=rid,
-                description=str(r.description or ""),
-                input_default=expand(r.input_default or ""),
-                output_default=expand(r.output_default or ""),
-                keep=list(r.keep or []),
-                rename=dict(r.rename or {}),
-                html_col=str(r.html_col or "").strip(),
-                meta_cols=_normalize_list(r.meta_cols),
-            )
-
-        # Validate quickruns refer to existing recipes
-        for qid, ids in (self.quickruns or {}).items():
-            if not str(qid).strip():
-                raise ValidationError("quickruns keys must be non-empty strings")
-            for rid in ids:
-                if rid not in resolved_recipes:
-                    raise ValidationError(f"quickrun '{qid}' references unknown recipe id: {rid}")
-
-        return CleaningRecipesResolved(
-            vars=vars_map,
-            recipes=resolved_recipes,
-            quickruns={k: list(v) for k, v in (self.quickruns or {}).items()},
-        )
-
-
-@dataclass(frozen=True)
-class RecipeResolved:
-    id: str
-    description: str
-    input_default: str
-    output_default: str
-    keep: List[str]
-    rename: Dict[str, str]
-    html_col: str
-    meta_cols: List[str]
-
-
-@dataclass(frozen=True)
-class CleaningRecipesResolved:
-    vars: Dict[str, str]
-    recipes: Dict[str, RecipeResolved]          # recipe_id -> resolved spec
-    quickruns: Dict[str, List[str]]             # quickrun_id -> recipe_ids
-
-
-SCHEMA_NAME = "cleaning_recipes"
-SCHEMA_VERSION = 1
-
-
-def _as_str_map(x: Any) -> Dict[str, str]:
-    if x is None:
-        return {}
-    if not isinstance(x, dict):
-        raise ValidationError("vars must be an object")
-    out: Dict[str, str] = {}
-    for k, v in x.items():
-        kk = str(k)
-        out[kk] = str(v)
-    return out
-
-
-def _parse_recipe(raw: Mapping[str, Any]) -> RecipeSpec:
-    if not isinstance(raw, dict):
-        raise ValidationError("recipes[] items must be objects")
-
-    rid = str(raw.get("id", "")).strip()
-    if not rid:
-        raise ValidationError("recipes[].id must be non-empty")
-
-    rename = raw.get("rename") or {}
-    if not isinstance(rename, dict):
-        raise ValidationError(f"recipes[{rid}].rename must be an object")
-
-    return RecipeSpec(
-        id=rid,
-        description=str(raw.get("description") or ""),
-        input_default=str(raw.get("input_default") or ""),
-        output_default=str(raw.get("output_default") or ""),
-        keep=list(raw.get("keep") or []) if isinstance(raw.get("keep"), list) else [],
-        rename={str(k): str(v) for k, v in rename.items()},
-        html_col=str(raw.get("html_col") or "").strip(),
-        meta_cols=list(raw.get("meta_cols") or []) if isinstance(raw.get("meta_cols"), list) else [],
-    )
-
-
-def validate_cleaning_recipes(raw: Dict[str, Any]) -> CleaningRecipesDoc:
-    if not isinstance(raw, dict):
-        raise ValidationError("Doc must be an object")
-
-    vars_map = _as_str_map(raw.get("vars"))
-
-    recipes_raw = raw.get("recipes") or []
-    if not isinstance(recipes_raw, list):
-        raise ValidationError("recipes must be a list")
-
-    recipes: List[RecipeSpec] = []
-    seen = set()
-    for r in recipes_raw:
-        spec = _parse_recipe(r)
-        if spec.id in seen:
-            raise ValidationError(f"Duplicate recipe id: {spec.id}")
-        seen.add(spec.id)
-        recipes.append(spec)
-
-    quickruns_raw = raw.get("quickruns") or {}
-    if isinstance(quickruns_raw, list):
-        # Back-compat with old shape: [{"id": "...", "recipe_ids":[...]}]
-        qr: Dict[str, List[str]] = {}
-        for q in quickruns_raw:
-            if not isinstance(q, dict):
-                raise ValidationError("quickruns[] items must be objects")
-            qid = str(q.get("id", "")).strip()
-            if not qid:
-                raise ValidationError("quickruns[].id must be non-empty")
-            recipe_ids = q.get("recipe_ids") or []
-            if not isinstance(recipe_ids, list):
-                raise ValidationError(f"quickruns[{qid}].recipe_ids must be a list")
-            qr[qid] = [str(x) for x in recipe_ids]
-        quickruns = qr
-    elif isinstance(quickruns_raw, dict):
-        quickruns = {str(k): [str(x) for x in (v or [])] for k, v in quickruns_raw.items()}
-    else:
-        raise ValidationError("quickruns must be an object or a list")
-
-    # Light referential check (full check happens on resolve())
-    recipe_ids = {r.id for r in recipes}
-    for qid, rids in quickruns.items():
-        for rid in rids:
-            if rid not in recipe_ids:
-                raise ValidationError(f"quickrun '{qid}' references unknown recipe id: {rid}")
-
-    return CleaningRecipesDoc(vars=vars_map, recipes=recipes, quickruns=quickruns)
-
-
-def dump_cleaning_recipes(doc: CleaningRecipesDoc) -> Dict[str, Any]:
-    return {
-        "vars": dict(doc.vars),
-        "recipes": [
-            {
-                "id": r.id,
-                "description": r.description,
-                "input_default": r.input_default,
-                "output_default": r.output_default,
-                "keep": list(r.keep or []),
-                "rename": dict(r.rename or {}),
-                "html_col": r.html_col,
-                "meta_cols": list(r.meta_cols or []),
-            }
-            for r in doc.recipes
-        ],
-        "quickruns": {k: list(v) for k, v in (doc.quickruns or {}).items()},
-    }
-
-
-RECIPES_LOADER: CatalogLoader[CleaningRecipesDoc] = CatalogLoader(
-    app_name="CSVcleaner",
-    schema_name=SCHEMA_NAME,
-    schema_version=SCHEMA_VERSION,
-    validate=validate_cleaning_recipes,
-    dump=dump_cleaning_recipes,
-)
-
-
-def load_recipes_resolved(path: str | Path) -> CleaningRecipesResolved:
-    """
-    Load recipes config through CatalogLoader + Catalog validation, then resolve env overrides and ${VARS}.
-    """
-    p = Path(path)
-    raw = RECIPES_LOADER.load_raw(p)
-    cat: Catalog[Any] = Catalog.load(
-        raw,
-        validate=RECIPES_LOADER.validate,
-        schema_name=RECIPES_LOADER.schema_name,
-        schema_version=RECIPES_LOADER.schema_version,
-    )
-    # cat.doc is typed as DocT in your codebase; keep Any here to avoid mypy coupling in scripts
-    doc = cat.doc  # type: ignore[attr-defined]
-    return doc.resolve(env_prefix="OPS_")
 
 
 def build_cleaner_args(recipe: RecipeResolved, input_path: str, output_path: str) -> List[str]:
@@ -348,22 +100,11 @@ async def run_quickrun_async(
         results[rid] = {"ok": code == 0, "returncode": code, "stdout": out, "stderr": err}
 
     if persist_root:
-        report = CleaningRunReport(
-            tool="cleaner_runner",
+        persist_quickrun_report(
+            persist_root,
             quickrun_id=quickrun_id,
             recipe_ids=list(cfg.quickruns[quickrun_id]),
             results=results,
-        )
-        editable = EditableCatalog.from_catalog(
-            report,
-            RUN_REPORT_PERSIST.loader.dump,
-            schema_name=RUN_REPORT_PERSIST.loader.schema_name,
-            schema_version=RUN_REPORT_PERSIST.loader.schema_version,
-        )
-        RUN_REPORT_PERSIST.save_new_revision(
-            Path(persist_root),
-            editable,
-            note=f"quickrun:{quickrun_id}",
         )
 
     return results
