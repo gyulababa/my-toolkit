@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable, Optional
+from typing import Any, Callable, Optional
 
 import numpy as np
 
@@ -16,9 +16,6 @@ from helpers.vision.runner import SourceRunner
 from helpers.vision.transforms.colors import ensure_rgb8
 from helpers.vision.transforms.crop import crop_rect_norm
 from helpers.vision.transforms.resize import resize_max
-
-from preview_vision.config_io import build_source_from_config, capture_config_from_vision, load_vision_config
-
 
 @dataclass
 class PreviewStats:
@@ -42,9 +39,20 @@ class VisionPreviewSession:
       - fps smoothing state
     """
 
-    def __init__(self, *, config_path: Path, runner_fps: Optional[float] = 30.0) -> None:
+    def __init__(
+        self,
+        *,
+        config_path: Path,
+        runner_fps: Optional[float] = 30.0,
+        load_config: Callable[[Path], Any],
+        capture_config: Callable[[Any], Any],
+        build_source: Callable[[Any], Any],
+    ) -> None:
         self.config_path = Path(config_path)
         self.runner_fps = runner_fps if (runner_fps and runner_fps > 0) else None
+        self._load_config = load_config
+        self._capture_config = capture_config
+        self._build_source = build_source
 
         self.buf = LatestFrameBuffer()
 
@@ -218,10 +226,10 @@ class VisionPreviewSession:
         return out
 
     def _rebuild_runner(self) -> None:
-        cfg = load_vision_config(self.config_path)
-        cap = capture_config_from_vision(cfg)
+        cfg = self._load_config(self.config_path)
+        cap = self._capture_config(cfg)
 
-        source = build_source_from_config(cap)
+        source = self._build_source(cap)
         self._driver_name = cap.driver
 
         transforms = self._build_transforms_from_cfg(cfg)
