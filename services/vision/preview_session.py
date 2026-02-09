@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Callable, Optional
+from typing import Callable, Optional
 
 import numpy as np
 
@@ -17,6 +17,7 @@ from helpers.vision.transforms.colors import ensure_rgb8
 from helpers.vision.transforms.crop import crop_rect_norm
 from helpers.vision.transforms.resize import resize_max
 
+from services.vision.interfaces import CaptureConfigBuilder, FrameSourceBuilder, VisionConfigLoader
 @dataclass
 class PreviewStats:
     """Snapshot of runtime stats for UI display."""
@@ -44,9 +45,9 @@ class VisionPreviewSession:
         *,
         config_path: Path,
         runner_fps: Optional[float] = 30.0,
-        load_config: Callable[[Path], Any],
-        capture_config: Callable[[Any], Any],
-        build_source: Callable[[Any], Any],
+        load_config: VisionConfigLoader,
+        capture_config: CaptureConfigBuilder,
+        build_source: FrameSourceBuilder,
     ) -> None:
         self.config_path = Path(config_path)
         self.runner_fps = runner_fps if (runner_fps and runner_fps > 0) else None
