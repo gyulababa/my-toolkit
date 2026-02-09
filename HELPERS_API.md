@@ -189,6 +189,12 @@ Safe to use inside rendering / driver layers, but avoid in domain logic.
 
 ## 3) Import Rules (Recommended)
 
+### Service/App Layering (Mandatory)
+
+Services must not import app modules.
+
+GUI adapters must live outside `services/` (use `app/adapters/...`).
+
 Preferred (Public API):
 
 ```python
