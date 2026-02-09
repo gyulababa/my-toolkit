@@ -59,3 +59,4 @@ Codex must:
 - [x] ID=T0114 STATUS=DONE TYPE=test SCOPE=tests/vision/test_transforms_crop.py VERIFY="pytest -q" DESC="Add unit tests covering crop rect normalization for both rect_norm (xywh) and xyxy semantics" COMMIT=5437f16 DATE=2026-02-09
 - [x] ID=T0115 STATUS=DONE TYPE=fix SCOPE=services/vision/layers_service.py VERIFY="pytest -q" DESC="Fix malformed import line(s) and ensure module imports cleanly without stray artifacts" COMMIT=84bdb5b DATE=2026-02-09
 - [x] ID=T0116 STATUS=DONE TYPE=fix SCOPE=services/vision/annotations_service.py VERIFY="pytest -q" DESC="Fix malformed import line(s) and ensure module imports cleanly without stray artifacts" COMMIT=18e7dce DATE=2026-02-09
+- [x] ID=T0117 STATUS=DONE TYPE=refactor SCOPE=services/vision/catalog_seed.py VERIFY="pytest -q" DESC="Move repo-layout-dependent seed loader out of services and make seeding accept explicit helpers_root if kept reusable" COMMIT=dc9423e DATE=2026-02-09
