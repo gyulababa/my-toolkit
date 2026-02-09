@@ -16,6 +16,10 @@ class TextureRef:
 class DpgTexturePool:
     """
     Owns one texture_registry + multiple DpgTexture objects by name.
+
+    TextureRef is a lightweight snapshot of the current texture tag.
+    If a texture resizes, DpgTexture retags internally; any cached TextureRef
+    may become stale. Callers should refresh refs via ensure()/update_rgba_u8().
     """
 
     def __init__(self, *, dpg, registry_tag: str = "texreg.main"):
