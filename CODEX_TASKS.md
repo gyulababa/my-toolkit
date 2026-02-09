@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0116 STATUS=TODO TYPE=fix SCOPE=services/vision/annotations_service.py VERIFY="pytest -q" DESC="Fix malformed import line(s) and ensure module imports cleanly without stray artifacts"
 - [ ] ID=T0117 STATUS=TODO TYPE=refactor SCOPE=services/vision/catalog_seed.py VERIFY="pytest -q" DESC="Move repo-layout-dependent seed loader out of services and make seeding accept explicit helpers_root if kept reusable"
 - [ ] ID=T0118 STATUS=TODO TYPE=refactor SCOPE=preview_vision/config_io.py VERIFY="pytest -q" DESC="Make preview_vision the sole owner of config IO wiring and pass built sources/config into services via injection"
 - [ ] ID=T0119 STATUS=TODO TYPE=doc SCOPE=HELPERS_API.md VERIFY="pytest -q" DESC="Document layering rule that services must not import apps and GUI adapters must live outside services"
