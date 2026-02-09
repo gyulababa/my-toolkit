@@ -10,7 +10,7 @@ from helpers.catalog import Catalog, EditableCatalog
 from helpers.catalogloader.loader import CatalogLoader
 from helpers.validation import ValidationError
 from helpers.catalogloader.persisted_index import PersistIndex, load_index, save_index
-from helpers.catalogloader.persisted_paths import domain_root, doc_path
+from helpers.catalogloader.persisted_paths import domain_root, doc_path, index_path
 from helpers.fs.dirs import ensure_dir
 
 DocT = TypeVar("DocT")
@@ -95,7 +95,9 @@ class PersistedCatalogLoader(Generic[DocT]):
     # -------------------------
     def load_revision_raw(self, persist_root: Path, doc_id: str) -> Dict[str, Any]:
         """Load a specific persisted revision as raw JSON (dict)."""
-        _ = self.ensure_seeded(persist_root)
+        idx = load_index(persist_root, self.domain)
+        if idx is None:
+            raise ValidationError(f"Persist index missing: {index_path(persist_root, self.domain)}")
         p = doc_path(persist_root, self.domain, doc_id)
         if not p.exists():
             raise ValidationError(f"Cannot load missing doc '{doc_id}' for domain '{self.domain}'")
