@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0107 STATUS=TODO TYPE=doc SCOPE=AGENTS.md,RUN_CODEX_REFACTOR.md,CODEX_TASKS.md,CODEX_TASK_HISTORY.md VERIFY="pytest -q" DESC="Fix self-referential COMMIT hash rule: stop using amend for registry updates; require separate post-task commit to record COMMIT=<task_sha> in history (no recursion), and update docs to define task commit vs registry-update commit"
 
 
 ---
