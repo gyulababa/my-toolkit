@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0113 STATUS=TODO TYPE=fix SCOPE=helpers/vision/transforms.py VERIFY="pytest -q" DESC="Fix crop rect parameter contract mismatch by supporting xywh_norm or converting rect_norm [x,y,w,h] to xyxy before crop"
 - [ ] ID=T0114 STATUS=TODO TYPE=test SCOPE=tests/vision/test_transforms_crop.py VERIFY="pytest -q" DESC="Add unit tests covering crop rect normalization for both rect_norm (xywh) and xyxy semantics"
 - [ ] ID=T0115 STATUS=TODO TYPE=fix SCOPE=services/vision/layers_service.py VERIFY="pytest -q" DESC="Fix malformed import line(s) and ensure module imports cleanly without stray artifacts"
 - [ ] ID=T0116 STATUS=TODO TYPE=fix SCOPE=services/vision/annotations_service.py VERIFY="pytest -q" DESC="Fix malformed import line(s) and ensure module imports cleanly without stray artifacts"
