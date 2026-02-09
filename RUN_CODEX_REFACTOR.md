@@ -1,58 +1,63 @@
-# RUN_CODEX_REFACTOR.md
+# RUN_CODEX_REFACTOR.md — Codex Execution Driver
 
 ## Control Chain
 
-Execution order and authority:
+Authority order:
 
-1. RUN_CODEX_REFACTOR.md (this file) — execution driver
-2. AGENTS.md — mandatory behavioral + architecture rules
-3. CODEX_TASKS.md — mechanical refactor steps
+1. RUN_CODEX_REFACTOR.md — execution driver
+2. AGENTS.md — rules + architecture
+3. CODEX_TASKS.md — phase plan
 
-If instructions conflict:
-AGENTS.md > RUN_CODEX_REFACTOR.md > CODEX_TASKS.md
-
----
-
-This file contains the exact one-line prompt + procedure to run the Codex refactor plan.
-This workflow is **idempotent**: it audits current state first and only applies missing changes.
-
-Prerequisites:
-- `AGENTS.md` and `CODEX_TASKS.md` exist at project root
-- Tests runnable via `pytest -q`
+AGENTS.md overrides all.
 
 ---
 
-## One-Line Start Prompt (Codex in VS Code)
+## Purpose
 
-Copy/paste into Codex:
+Run Codex in enforcement mode:
 
-Follow RUN_CODEX_REFACTOR.md exactly. Obey AGENTS.md rules. Execute the audit + phases in CODEX_TASKS.md, commit each phase separately, run `pytest -q` after each phase, and finish with a summary: phases completed, files created/modified, imports rewritten, and test results.
+- helpers.persist = canonical persistence API
+- helpers.catalogloader = deprecated facade
+- migrate imports
+- add deprecation warnings
+- enforce boundaries
 
----
-
-## How to Run
-
-1) Open repo in VS Code
-2) Open Codex panel
-3) Paste the one-line prompt above
-4) Review each phase commit
-5) Ensure pytest passes after each phase
+Workflow is idempotent and audit-first.
 
 ---
 
-## Manual quick checks (optional)
+## One-Line Codex Prompt (VS Code)
 
-From repo root:
+Paste into Codex:
 
-- Internal fs_utils usage should be gone:
-  rg -n "helpers\.fs_utils" helpers preview_vision services
-
-- Persisted path literals should be centralized:
-  rg -n "persist_root\s*/\s*\"|/ \"index\.json\"|/ \"docs\"" helpers/catalogloader
-
-- load_revision_* must be read-only:
-  rg -n "def load_revision_" helpers/catalogloader/persistedloader.py
+Follow RUN_CODEX_REFACTOR.md exactly. Enforce helpers.persist as canonical persistence API, deprecate helpers.catalogloader into a thin facade, migrate imports, add deprecation warnings, commit each phase separately, run pytest -q after each phase, and produce a final summary.
 
 ---
 
-End of RUN_CODEX_REFACTOR.md
+## Steps Codex Will Execute
+
+Phase 0 — audit catalogloader usage  
+Phase 1 — migrate imports to helpers.persist  
+Phase 2 — convert catalogloader to facade  
+Phase 3 — add deprecation warnings  
+Phase 4 — enforce persistence boundaries  
+
+Each phase:
+- separate commit
+- pytest run
+- summary
+
+---
+
+## Manual Quick Checks (Optional)
+
+    rg -n "helpers\.catalogloader" .
+    rg -n "helpers\.persist" .
+
+Expect:
+- catalogloader only in facade + tests
+- persist everywhere else
+
+---
+
+End of file

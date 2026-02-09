@@ -1,214 +1,196 @@
 # AGENTS.md — Codex / AI Coder Operating Rules (my-toolkit)
 
-This file defines mandatory rules and workflow expectations for AI coding agents
-(Codex and similar) operating on this repository.
+Scope: whole repository.  
+These rules override generic agent defaults.
 
-Scope: whole repository (root).  
-Priority: These rules override generic agent defaults.
-
----
-
-# 0. Primary Objectives
-
-- Prefer **mechanical, low-risk refactors** over creative rewrites.
-- Keep changes **small, reviewable, and reversible**.
-- Preserve **public APIs and behavior** unless explicitly instructed.
-- Maintain **layered architecture boundaries** inside helpers/*.
-- Ensure **tests pass after every phase** of changes.
+Primary mode: SAFE REFACTOR + ARCHITECTURE ENFORCEMENT
 
 ---
 
-# 1. Change Discipline
+# 0. Core Objectives
 
-## 1.1 Commit discipline
-- Use multiple small commits, not one large commit.
-- One logical change per commit.
-- Commit messages must be structured:
-  - `refactor(fs): ...`
-  - `refactor(persist): ...`
-  - `feat(fs): ...`
-  - `test: ...`
-  - `chore: ...`
-
-## 1.2 Allowed change types (default mode)
-
-Allowed without extra instruction:
-- Import rewrites
-- File splits
-- Function moves without behavior change
-- Wrapper/facade creation
-- Schema field additions (non-breaking)
-- Adding validation
-- Adding safety guards
-- Adding new helper modules
-
-NOT allowed unless explicitly requested:
-- Renaming public classes/functions
-- Removing modules used by tests
-- Behavior changes
-- Data format changes
-- Silent schema changes
-- UI behavior changes
+- Keep changes small and reviewable
+- Prefer mechanical refactors over rewrites
+- Preserve behavior and public APIs unless explicitly told otherwise
+- Enforce architecture boundaries
+- Keep tests passing after each phase
 
 ---
 
-# 2. Verification Requirements
+# 1. Commit Rules
 
-After EACH phase or commit group, run:
+One logical change per commit.
+
+Use structured prefixes:
+
+- refactor(persist):
+- refactor(fs):
+- refactor(imports):
+- feat(persist):
+- fix(tests):
+- chore(docs):
+
+Never mix refactor + behavior change in one commit.
+
+---
+
+# 2. Verification Rules
+
+After every phase:
 
     pytest -q
 
-Optional additional checks:
+Optional:
 
     python -m compileall .
 
-Never declare task complete without test run results.
+Do not declare completion without test results.
 
 ---
 
-# 3. Architecture Layering Rules
+# 3. Architecture Authority Map (CURRENT TRUTH)
 
-## 3.1 helpers/* is UI-free
-Modules under `helpers/` must NOT import:
+## Persistence Layer — CANONICAL
+
+helpers/persist/* is the canonical persistence API.
+
+All new code must use:
+
+    helpers.persist.*
+
+This layer owns:
+- persisted document storage
+- revisions
+- index handling
+- persistence schemas
+- loaders/savers
+
+## Catalog Loader — DEPRECATED COMPAT LAYER
+
+helpers/catalogloader/* is deprecated compatibility.
+
+Rules:
+
+- Do not add new features here
+- Do not expand APIs
+- Only allowed changes:
+  - thin wrappers
+  - forwarding adapters
+  - deprecation warnings
+  - import redirects
+
+New code must NOT depend on helpers.catalogloader.
+
+---
+
+# 4. helpers/* Layering Rules
+
+helpers/* must remain frontend-agnostic.
+
+Must NOT import:
 - dearpygui
 - PySide / Qt
 - tkinter
-- any GUI toolkit
 - preview_vision/*
 - services/*
-
-helpers/* = reusable, frontend-agnostic core utilities.
+- any UI framework
 
 ---
 
-# 4. Filesystem Rules
+# 5. Filesystem Rules
 
-## 4.1 Canonical FS modules
-All filesystem operations must come from:
+Canonical FS helpers live in:
 
     helpers/fs/*
 
-Submodules include:
-- helpers/fs/atomic.py
-- helpers/fs/dirs.py
-- helpers/fs/text.py
-- helpers/fs/json.py
-- helpers/fs/bytes.py
-- helpers/fs/paths.py
-
-## 4.2 helpers/fs_utils.py status
-- DO NOT delete `helpers/fs_utils.py`
-- Tests depend on it
-- It is treated as a **compatibility facade**
-- Internal modules should migrate to helpers/fs/* instead
-
-Rule:
-
-> helpers/* modules must prefer helpers/fs/* over helpers.fs_utils
-
----
-
-# 5. Persistence / Catalog Loader Rules
-
 Modules:
+- atomic
+- dirs
+- text
+- json
+- bytes
+- paths
 
-    helpers/catalogloader/*
+## helpers/fs_utils.py
 
-## 5.1 Responsibility split (required target state)
-persistedloader.py = orchestration only
-
-Must delegate to:
-- persisted_paths.py → path construction only
-- persisted_index.py → index schema + load/save
-- helpers/fs/* → IO primitives
-
-No mixed responsibilities.
-
-## 5.2 Path construction rules
-Do NOT scatter path literals like:
-    persist_root / "index.json"
-    persist_root / domain / "docs"
-
-Instead use helpers/catalogloader/persisted_paths.py.
-
-## 5.3 Index schema rules
-Persisted index JSON must contain:
-    schema_name
-    schema_version
-
-Loader must validate required fields and raise ValueError on invalid data.
-
-## 5.4 Revision load rules
-Functions:
-    load_revision_raw
-    load_revision_editable
-    load_revision_catalog
-
-Must:
-- NOT modify index.json
-- NOT change active_id
-- NOT promote revisions implicitly
-- Be read-only operations
+- Keep for compatibility + tests
+- Do not delete
+- Treat as facade
+- helpers/* modules should prefer helpers/fs/* directly
 
 ---
 
-# 6. Safe Path Handling Rules
+# 6. Safe Path Rules
 
-Use safe helpers for externally influenced path parts:
+Use helpers/fs/paths.py:
 
-    helpers/fs/paths.py
+- join_safe
+- ensure_under_root
 
-Functions:
-- join_safe(root, *parts)
-- ensure_under_root(root, candidate)
-
-Rules:
-- Never join user-controlled strings directly with `/`
-- Always normalize + validate containment
+Never join user-controlled strings directly with `/`.
 
 ---
 
 # 7. Catalog / EditableCatalog Rules
 
-Modules:
-    helpers/catalog/catalog.py
-    helpers/catalog/editable.py
+helpers/catalog/*:
+
+- Catalog behaves immutable
+- EditableCatalog deep-copies inputs
+- No mutable references leaked
+- Export returns safe copies
+
+---
+
+# 8. Persistence Rules
+
+helpers/persist/* is source of truth.
 
 Rules:
-- Catalog objects should behave as immutable views
-- EditableCatalog must deep-copy input documents
-- Do not expose internal mutable references directly
-- to_dict()/export methods should return safe copies
+
+- Path layout logic centralized
+- Index schema must include:
+  - schema_name
+  - schema_version
+- Load-revision APIs must be read-only
+- No scattered persistence path literals outside persist helpers
 
 ---
 
-# 8. Mechanical Refactor Guidance (Codex Mode)
-
-When instructions say "mechanical":
+# 9. Mechanical Refactor Mode (Default)
 
 Allowed:
-- search/replace imports
-- move functions between files
-- extract classes/dataclasses
-- create wrapper modules
-- update import paths
+- import rewrites
+- module moves
+- facade wrappers
+- deprecation redirects
+- path centralization
 
 Not allowed:
-- rewriting algorithms
-- changing control flow
-- changing return shapes
-- renaming public symbols
+- algorithm rewrites
+- return-shape changes
+- public symbol renames
 
-If uncertain → keep original behavior.
+If uncertain → preserve behavior.
 
 ---
 
-# 9. Reporting Requirements (Final Output)
+# 10. Test Authority
 
-At end of task, agent must report:
-- Phases completed
-- Files created
-- Files modified
-- Imports rewritten
-- Tests result summary
-- Any deferred items
+Tests define behavior.
+
+- Do not rewrite tests to hide failures
+- Only update imports if module paths change
+- Missing legacy symbols may be restored via compatibility shims
+
+---
+
+# 11. Reporting Requirements
+
+Final report must include:
+
+- phases completed
+- files changed
+- imports rewritten
+- deprecated usages found
+- test results
