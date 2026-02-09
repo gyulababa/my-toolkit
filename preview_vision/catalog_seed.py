@@ -1,4 +1,4 @@
-# services/vision/catalog_seed.py
+# preview_vision/catalog_seed.py
 # Reads the default JSON seeds from helpers/configs/...
 
 from __future__ import annotations
@@ -15,9 +15,9 @@ def load_json_file(path: Path) -> Dict[str, Any]:
     return data
 
 
-def seed_layer_catalog_from_repo(repo_root: Path) -> Dict[str, Any]:
-    return load_json_file(repo_root / "helpers" / "configs" / "layers" / "default.json")
+def seed_layer_catalog_from_helpers_root(helpers_root: Path) -> Dict[str, Any]:
+    return load_json_file(helpers_root / "configs" / "layers" / "default.json")
 
 
-def seed_annotation_catalog_from_repo(repo_root: Path) -> Dict[str, Any]:
-    return load_json_file(repo_root / "helpers" / "configs" / "vision" / "annotations" / "default.json")
+def seed_annotation_catalog_from_helpers_root(helpers_root: Path) -> Dict[str, Any]:
+    return load_json_file(helpers_root / "configs" / "vision" / "annotations" / "default.json")
