@@ -9,7 +9,8 @@ from typing import Any, Callable, Dict, Generic, Optional, TypeVar
 from helpers.catalog import Catalog, EditableCatalog
 from helpers.catalogloader.loader import CatalogLoader
 from helpers.validation import ValidationError
-from helpers.fs_utils import ensure_dir, atomic_write_text  # later: helpers.fs.*
+from helpers.fs.dirs import ensure_dir
+from helpers.fs.atomic import atomic_write_text
 
 DocT = TypeVar("DocT")
 
