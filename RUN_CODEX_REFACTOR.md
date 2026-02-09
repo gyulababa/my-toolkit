@@ -35,6 +35,7 @@ Follow RUN_CODEX_REFACTOR.md exactly. Obey AGENTS.md. Execute tasks from CODEX_T
 - Only update the STATUS line fields; do not rewrite task descriptions.
 - Guardrail: helpers/* must not import helpers.catalogloader outside helpers/catalogloader/* (enforced by tests).
 - Guardrail: persistence markers (index.json, active_id, next_int, persist_root) confined to helpers/persist/* and helpers/catalogloader/*.
+- Guardrail: helpers/* forbidden imports (UI frameworks, services, requests, subprocess) enforced by tests.
 
 If a task cannot be completed:
 - set STATUS=SKIP in CODEX_TASKS.md

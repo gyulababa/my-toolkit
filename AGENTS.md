@@ -227,6 +227,7 @@ Agents should prefer adding:
 - architecture import tests
 - helpers/catalogloader import guard (helpers/* must not import helpers.catalogloader outside helpers/catalogloader/*)
 - persist boundary guards (persistence markers confined to helpers/persist/* and helpers/catalogloader/*)
+- helpers/* forbidden import guard (UI frameworks, services, requests, subprocess)
 - boundary enforcement tests
 - facade consistency tests
 - deprecation warning tests
