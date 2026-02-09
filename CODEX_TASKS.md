@@ -30,7 +30,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 
 
-- [ ] ID=T0143 STATUS=TODO TYPE=refactor SCOPE=helpers/zones/editor.py VERIFY="pytest -q" DESC="Add ZonesEditor helper to coalesce geometry drag updates using coalesce_key while keeping History patch paths stable"
 
 ---
 
