@@ -182,6 +182,27 @@ class ZonesEditor:
         )
         self.doc = self.history.apply(self.doc, op)
 
+    def set_rect_px_drag(
+        self,
+        preset_id: str,
+        zone_key: str,
+        xyxy: Tuple[int, int, int, int],
+        *,
+        frame_size: Optional[Tuple[int, int]] = None,
+    ) -> None:
+        """
+        Coalesced rect_px update for drag operations.
+
+        Uses the same patch path as set_rect_px while coalescing History updates.
+        """
+        self.set_rect_px(
+            preset_id,
+            zone_key,
+            xyxy,
+            frame_size=frame_size,
+            coalesce=True,
+        )
+
     # -----------------
     # Consumers (opaque payloads)
     # -----------------
