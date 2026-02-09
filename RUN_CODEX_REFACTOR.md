@@ -33,8 +33,8 @@ Follow RUN_CODEX_REFACTOR.md exactly. Obey AGENTS.md. Execute tasks from CODEX_T
 
 - Tasks are executed in order, one per commit.
 - Only update the STATUS line fields; do not rewrite task descriptions.
-- Allowed: up to two `git commit --amend --no-edit` per task, solely to inject or correct COMMIT=<sha> in registry/history task lines.
-- After any run, copy all STATUS=DONE task lines verbatim into CODEX_TASK_HISTORY.md and remove them from CODEX_TASKS.md (append-only history).
+- No amend for registry updates. After each task commit, create a separate registry-update commit to record COMMIT=<task_sha> in CODEX_TASK_HISTORY.md and remove the task line from CODEX_TASKS.md.
+- After any run, copy all STATUS=DONE task lines verbatim into CODEX_TASK_HISTORY.md and remove them from CODEX_TASKS.md (append-only history) via the registry-update commit.
 - Guardrail: helpers/* must not import helpers.catalogloader outside helpers/catalogloader/* (enforced by tests).
 - Guardrail: persistence markers (index.json, active_id, next_int, persist_root) confined to helpers/persist/* and helpers/catalogloader/*.
 - Guardrail: helpers/* forbidden imports (UI frameworks, services, requests, subprocess) enforced by tests.

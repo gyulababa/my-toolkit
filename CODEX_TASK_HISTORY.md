@@ -30,6 +30,7 @@ Codex must:
 1) Copy the full task line here unchanged
 2) Then remove it from CODEX_TASKS.md
 3) Preserve field order and spacing exactly
+4) Use a registry-update commit to record COMMIT=<task_sha> and DATE from the task commit; never amend the task commit for registry updates
 
 ---
 

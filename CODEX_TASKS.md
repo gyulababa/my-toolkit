@@ -17,10 +17,10 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
    - make a single focused commit
    - run the VERIFY command
    - mark task as DONE only if VERIFY passes
-   - if the commit is amended and hash changes, a second `git commit --amend --no-edit` is allowed solely to correct COMMIT=<sha> in registry/history task lines
+   - do not amend the task commit for registry updates
 3) After completing at least one task:
    - update AGENTS.md / RUN_CODEX_REFACTOR.md if needed
-   - copy all STATUS=DONE tasks verbatim into CODEX_TASK_HISTORY.md and remove them from CODEX_TASKS.md (append-only history; mandatory)
+   - create a registry-update commit to copy all STATUS=DONE tasks (with COMMIT=<task_sha> and DATE) verbatim into CODEX_TASK_HISTORY.md and remove them from CODEX_TASKS.md (append-only history; mandatory)
 4) Tasks must NOT be merged or reordered.
 5) Exactly one registry task per commit.
 
@@ -28,6 +28,7 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
+- [ ] ID=T0107 STATUS=TODO TYPE=doc SCOPE=AGENTS.md,RUN_CODEX_REFACTOR.md,CODEX_TASKS.md,CODEX_TASK_HISTORY.md VERIFY="pytest -q" DESC="Fix self-referential COMMIT hash rule: stop using amend for registry updates; require separate post-task commit to record COMMIT=<task_sha> in history (no recursion), and update docs to define task commit vs registry-update commit"
 
 
 ---
