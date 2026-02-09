@@ -1,141 +1,58 @@
-# CODEX_TASKS.md — Persistence API Inversion + Deprecation Enforcement
+# CODEX_TASKS.md — Task Registry (Guardrail Mode)
 
-Repo state: refactor already completed.  
-Goal now: enforce helpers.persist as canonical and deprecate catalogloader safely.
+Baseline:
+- helpers.persist = canonical persistence layer (implemented)
+- helpers.catalogloader = deprecated facade (implemented)
+- migration phases are DONE
 
-Global rules:
-- helpers/persist/* is canonical
-- helpers/catalogloader/* is deprecated facade only
-- Mechanical refactor only
-- Run pytest -q after each phase
-
----
-
-# Phase 0 — Baseline Audit
-
-Run:
-
-    pytest -q
-
-Search for deprecated imports:
-
-    rg -n "helpers\.catalogloader" .
-
-Classify hits:
-- tests → allowed
-- helpers/catalogloader itself → allowed
-- anywhere else → must migrate
-
-Commit:
-    chore(audit): catalogloader usage inventory
+This file is the ONLY automatic execution source for Codex tasks.
+Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicitly copied here.
 
 ---
 
-# Phase 1 — Import Migration to helpers.persist
+## How Codex must operate
 
-For every non-test module importing helpers.catalogloader:
-
-Replace:
-
-    from helpers.catalogloader.X import Y
-
-With helpers.persist equivalent.
-
-Rules:
-- Do not change behavior
-- Only change import paths
-- Keep symbol names same where possible
-
-Verify:
-
-    pytest -q
-
-Commit:
-    refactor(imports): migrate to helpers.persist API
+1) Execute tasks in ID order (T0001..).
+2) For each task:
+   - make a single focused commit
+   - run the VERIFY command
+   - mark task as DONE only if VERIFY passes
+3) After completing at least one task:
+   - update AGENTS.md / RUN_CODEX_REFACTOR.md if needed
+   - prune only tasks with STATUS=DONE (optional; preferred to keep history)
+4) Tasks must NOT be merged or reordered.
+5) Exactly one registry task per commit.
 
 ---
 
-# Phase 2 — Catalogloader → Thin Facade
+## Task Registry
 
-helpers/catalogloader/* must become thin wrappers.
-
-Allowed contents:
-
-- import from helpers.persist
-- forward calls
-- optional DeprecationWarning
-
-Not allowed:
-
-- new logic
-- persistence rules
-- path building
-- schema validation
-
-Pattern:
-
-    from helpers.persist.foo import Bar as Bar
-
-or wrapper function that calls persist layer.
-
-Verify:
-
-    pytest -q
-
-Commit:
-    refactor(catalogloader): convert to deprecated facade
+- [x] ID=T0001 STATUS=DONE TYPE=test SCOPE=tests/ VERIFY="pytest -q" DESC="Add architecture import guard: fail if helpers.catalogloader is imported anywhere under helpers/* except helpers/catalogloader/*; allow tests/*; allow services/* (migration backlog tracked in CATALOGLOADER_AUDIT.md)" COMMIT=748a568 DATE=2026-02-09
+- [ ] ID=T0002 STATUS=TODO TYPE=test SCOPE=tests/ VERIFY="pytest -q" DESC="Add persist boundary guard test: fail if persistence markers (index.json, active_id, next_int, persist_root /) appear outside helpers/persist/* and helpers/catalogloader/*"
+- [ ] ID=T0003 STATUS=TODO TYPE=test SCOPE=tests/ VERIFY="pytest -q" DESC="Add facade deprecation warning tests: ensure importing/constructing catalogloader facade emits DeprecationWarning"
+- [ ] ID=T0004 STATUS=TODO TYPE=refactor SCOPE=helpers/persist/* VERIFY="pytest -q" DESC="Add missing type hints in helpers/persist (annotations only, no behavior changes)"
+- [ ] ID=T0005 STATUS=TODO TYPE=test SCOPE=tests/ VERIFY="pytest -q" DESC="Add persist roundtrip test: persist -> load -> equality, using temp dir"
+- [ ] ID=T0100 STATUS=TODO TYPE=refactor SCOPE=services/ VERIFY="pytest -q" DESC="Migrate known non-test catalogloader imports listed in CATALOGLOADER_AUDIT.md to helpers.persist equivalents (mechanical import-only refactor; keep behavior)"
 
 ---
 
-# Phase 3 — Deprecation Warnings
+## Completion rule
 
-Add DeprecationWarning in catalogloader public entrypoints.
-
-Pattern:
-
-    import warnings
-    warnings.warn("helpers.catalogloader is deprecated; use helpers.persist", DeprecationWarning, stacklevel=2)
-
-Do not change behavior.
-
-Verify:
-
-    pytest -q
-
-Commit:
-    feat(deprecation): catalogloader warnings
+When a task is completed, update its line:
+- set STATUS=DONE
+- change checkbox to [x]
+- append COMMIT=<sha> DATE=<YYYY-MM-DD>
 
 ---
 
-# Phase 4 — Persistence Boundary Enforcement
+## Control Doc Sync (Mandatory)
 
-Ensure:
+If any task changes architecture rules, workflow, or guardrails:
 
-- No scattered persist path literals outside helpers.persist
-- No index schema logic outside helpers.persist
-- No revision promotion inside read-only loaders
+Codex MUST update:
+- AGENTS.md
+- RUN_CODEX_REFACTOR.md
+- CODEX_TASKS.md
 
-Search:
+in the same run.
 
-    rg -n "persist_root\s*/" helpers
-
-Move logic into helpers.persist if found.
-
-Verify:
-
-    pytest -q
-
-Commit:
-    refactor(persist): enforce persistence boundaries
-
----
-
-# Deliverable Summary
-
-Report:
-
-- migrated imports
-- facade modules
-- warnings added
-- violations fixed
-- test results

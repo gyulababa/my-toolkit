@@ -1,12 +1,11 @@
-# RUN_CODEX_REFACTOR.md — Codex Execution Driver
+# RUN_CODEX_REFACTOR.md — Codex Execution Driver (Task Registry Mode)
 
 ## Control Chain
 
 Authority order:
-
-1. RUN_CODEX_REFACTOR.md — execution driver
-2. AGENTS.md — rules + architecture
-3. CODEX_TASKS.md — phase plan
+1) RUN_CODEX_REFACTOR.md — execution driver
+2) AGENTS.md — rules + architecture
+3) CODEX_TASKS.md — task registry
 
 AGENTS.md overrides all.
 
@@ -14,50 +13,42 @@ AGENTS.md overrides all.
 
 ## Purpose
 
-Run Codex in enforcement mode:
+Run Codex in guardrail/enforcement mode using a machine-checkable task registry.
 
-- helpers.persist = canonical persistence API
+Canonical persistence API:
+- helpers.persist = canonical
 - helpers.catalogloader = deprecated facade
-- migrate imports
-- add deprecation warnings
-- enforce boundaries
 
-Workflow is idempotent and audit-first.
+Do NOT execute roadmap items in CODEX_FUTURE_PLANS.md unless explicitly instructed.
 
 ---
 
 ## One-Line Codex Prompt (VS Code)
 
-Paste into Codex:
-
-Follow RUN_CODEX_REFACTOR.md exactly. Enforce helpers.persist as canonical persistence API, deprecate helpers.catalogloader into a thin facade, migrate imports, add deprecation warnings, commit each phase separately, run pytest -q after each phase, and produce a final summary.
+Follow RUN_CODEX_REFACTOR.md exactly. Obey AGENTS.md. Execute tasks from CODEX_TASKS.md in ID order. For each task: make one focused commit, run `pytest -q`, then mark the task line STATUS=DONE with COMMIT=<sha> DATE=<YYYY-MM-DD>. Do not execute CODEX_FUTURE_PLANS.md.
 
 ---
 
-## Steps Codex Will Execute
+## Execution Notes
 
-Phase 0 — audit catalogloader usage  
-Phase 1 — migrate imports to helpers.persist  
-Phase 2 — convert catalogloader to facade  
-Phase 3 — add deprecation warnings  
-Phase 4 — enforce persistence boundaries  
+- Tasks are executed in order, one per commit.
+- Only update the STATUS line fields; do not rewrite task descriptions.
+- Guardrail: helpers/* must not import helpers.catalogloader outside helpers/catalogloader/* (enforced by tests).
 
-Each phase:
-- separate commit
-- pytest run
-- summary
+If a task cannot be completed:
+- set STATUS=SKIP in CODEX_TASKS.md
+- keep checkbox unchecked
+- include reason in final summary
 
----
-
-## Manual Quick Checks (Optional)
-
-    rg -n "helpers\.catalogloader" .
-    rg -n "helpers\.persist" .
-
-Expect:
-- catalogloader only in facade + tests
-- persist everywhere else
+If implementing a new guardrail test would fail due to known migration backlog, either:
+- migrate the backlog first (preferred), or
+- scope the guardrail to helpers/* only (allowed), and keep backlog tracked.
 
 ---
 
-End of file
+## Final Summary Requirements
+
+- list executed task IDs
+- commits created
+- pytest results
+- any tasks skipped and rationale
