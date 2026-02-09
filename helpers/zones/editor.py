@@ -8,11 +8,7 @@ from helpers.history.ops import Operation, OpMeta
 from helpers.history.history import History
 from helpers.history.applier_tree import TreeApplier
 
-from helpers.geometry.rect import (
-    normalize_xyxy,
-    clamp_xyxy_to_bounds,
-    clamp_xyxy_preserve_size,
-)
+import helpers.geometry.rect as geometry_rect
 
 
 from .schema import ensure_library_shape
@@ -167,10 +163,10 @@ class ZonesEditor:
         Set geometry to rect_px. Optionally clamps to frame_size (width,height).
         If coalesce=True, emits a stable coalesce_key for drag updates.
         """
-        x0, y0, x1, y1 = normalize_xyxy(xyxy)
+        x0, y0, x1, y1 = geometry_rect.normalize_xyxy(xyxy)
         if frame_size is not None:
             w, h = frame_size
-            x0, y0, x1, y1 = clamp_xyxy_to_bounds((x0, y0, x1, y1), w=w, h=h)
+            x0, y0, x1, y1 = geometry_rect.clamp_xyxy_to_bounds((x0, y0, x1, y1), w=w, h=h)
 
         new_geom = {"type": "rect_px", "xyxy": [int(x0), int(y0), int(x1), int(y1)]}
         path = _zone_path(preset_id, zone_key, "geometry")
