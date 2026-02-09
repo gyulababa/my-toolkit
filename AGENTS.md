@@ -55,13 +55,12 @@ NOT allowed unless explicitly requested:
 # 2. Verification Requirements
 
 After EACH phase or commit group, run:
-pytest -q
 
-
+    pytest -q
 
 Optional additional checks:
-python -m compileall .
 
+    python -m compileall .
 
 Never declare task complete without test run results.
 
@@ -69,11 +68,8 @@ Never declare task complete without test run results.
 
 # 3. Architecture Layering Rules
 
-These are strict.
-
 ## 3.1 helpers/* is UI-free
 Modules under `helpers/` must NOT import:
-
 - dearpygui
 - PySide / Qt
 - tkinter
@@ -85,13 +81,12 @@ helpers/* = reusable, frontend-agnostic core utilities.
 
 ---
 
-## 3.2 Filesystem access rules
+# 4. Filesystem Rules
 
-### Canonical FS modules
+## 4.1 Canonical FS modules
 All filesystem operations must come from:
 
-helpers/fs/*
-
+    helpers/fs/*
 
 Submodules include:
 - helpers/fs/atomic.py
@@ -99,9 +94,9 @@ Submodules include:
 - helpers/fs/text.py
 - helpers/fs/json.py
 - helpers/fs/bytes.py
-- helpers/fs/paths.py (new safe path layer)
+- helpers/fs/paths.py
 
-### helpers/fs_utils.py status
+## 4.2 helpers/fs_utils.py status
 - DO NOT delete `helpers/fs_utils.py`
 - Tests depend on it
 - It is treated as a **compatibility facade**
@@ -109,72 +104,47 @@ Submodules include:
 
 Rule:
 
-> helpers/* modules must prefer helpers/fs/* over helpers/fs_utils.py
+> helpers/* modules must prefer helpers/fs/* over helpers.fs_utils
 
 ---
 
-# 4. Persistence / Catalog Loader Rules
+# 5. Persistence / Catalog Loader Rules
 
 Modules:
 
-helpers/catalogloader/*
+    helpers/catalogloader/*
 
-
-## 4.1 Responsibility split (required target state)
-
+## 5.1 Responsibility split (required target state)
 persistedloader.py = orchestration only
 
 Must delegate to:
-
 - persisted_paths.py → path construction only
 - persisted_index.py → index schema + load/save
 - helpers/fs/* → IO primitives
 
 No mixed responsibilities.
 
----
-
-## 4.2 Path construction rules
-
+## 5.2 Path construction rules
 Do NOT scatter path literals like:
+    persist_root / "index.json"
+    persist_root / domain / "docs"
 
+Instead use helpers/catalogloader/persisted_paths.py.
 
-persist_root / "index.json"
-persist_root / domain / "docs"
-
-
-Instead use:
-
-helpers/catalogloader/persisted_paths.py
-
-
-All persisted layout knowledge must live there.
-
----
-
-## 4.3 Index schema rules
-
+## 5.3 Index schema rules
 Persisted index JSON must contain:
-
-schema_name
-schema_version
-
+    schema_name
+    schema_version
 
 Loader must validate required fields and raise ValueError on invalid data.
 
----
-
-## 4.4 Revision load rules
-
+## 5.4 Revision load rules
 Functions:
-
-load_revision_raw
-load_revision_editable
-load_revision_catalog
-
+    load_revision_raw
+    load_revision_editable
+    load_revision_catalog
 
 Must:
-
 - NOT modify index.json
 - NOT change active_id
 - NOT promote revisions implicitly
@@ -182,37 +152,29 @@ Must:
 
 ---
 
-# 5. Safe Path Handling Rules
+# 6. Safe Path Handling Rules
 
-Use safe helpers for externally influenced path parts.
+Use safe helpers for externally influenced path parts:
 
-Module:
-
-helpers/fs/paths.py
-
+    helpers/fs/paths.py
 
 Functions:
-
 - join_safe(root, *parts)
 - ensure_under_root(root, candidate)
 
 Rules:
-
 - Never join user-controlled strings directly with `/`
 - Always normalize + validate containment
 
 ---
 
-# 6. Catalog / EditableCatalog Rules
+# 7. Catalog / EditableCatalog Rules
 
 Modules:
-
-helpers/catalog/catalog.py
-helpers/catalog/editable.py
-
+    helpers/catalog/catalog.py
+    helpers/catalog/editable.py
 
 Rules:
-
 - Catalog objects should behave as immutable views
 - EditableCatalog must deep-copy input documents
 - Do not expose internal mutable references directly
@@ -220,34 +182,7 @@ Rules:
 
 ---
 
-# 7. Tags Subsystem Rules
-
-Modules:
-
-helpers/tags/*
-
-
-Rules:
-
-- Query logic separated from data containers
-- TagQuery objects are serializable
-- Index structures (if added) must be optional acceleration layers
-- No IO inside pure tag model classes
-
----
-
-# 8. Config Defaults Rules
-
-If working with helpers/configs:
-
-- Default configs must validate on load
-- Validation must be explicit
-- Silent fallback is not allowed
-- Missing required fields must raise
-
----
-
-# 9. Mechanical Refactor Guidance (Codex Mode)
+# 8. Mechanical Refactor Guidance (Codex Mode)
 
 When instructions say "mechanical":
 
@@ -268,58 +203,12 @@ If uncertain → keep original behavior.
 
 ---
 
-# 10. Search / Replace Safety
-
-Before global replacement:
-
-1. Run ripgrep search
-2. List matched files
-3. Exclude:
-   - tests (unless instructed)
-   - compatibility facades
-4. Apply change
-5. Run tests
-
-Never blind-replace across repo without match review.
-
----
-
-# 11. Test Protection Rules
-
-- Tests are authoritative for behavior
-- Do not rewrite tests to make failures disappear
-- Only update tests if:
-  - import paths changed
-  - module split requires path update
-- If behavior conflict appears → stop and report
-
----
-
-# 12. Reporting Requirements (Final Output)
+# 9. Reporting Requirements (Final Output)
 
 At end of task, agent must report:
-
 - Phases completed
 - Files created
 - Files modified
 - Imports rewritten
 - Tests result summary
 - Any deferred items
-
----
-
-# 13. Default Execution Mode
-
-Unless instructed otherwise:
-
-> Operate in SAFE REFACTOR MODE
-
-Meaning:
-- No behavior change
-- No public API change
-- No schema change
-- Only structural improvements
-
----
-
-End of AGENTS.md

@@ -173,38 +173,75 @@ def accent_strong(c: ColorRGB) -> ColorRGB:
 # ─────────────────────────────────────────────────────────────
 
 
+@dataclass(frozen=True)
+class AnchorVariants:
+    low: ColorRGB
+    muted: ColorRGB
+    high: ColorRGB
+    very_low: Optional[ColorRGB]
+    very_high: Optional[ColorRGB]
+
+
+def _cohere(c: ColorRGB, toward: Optional[ColorRGB], alpha: float) -> ColorRGB:
+    if toward is None or alpha <= 0:
+        return c
+    return blend_rgb(c, toward, clamp01(alpha))
+
+
 def variants_from_anchor(
     anchor: ColorRGB,
     *,
-    low_v: float = 0.22,
-    mid_v: float = 0.55,
-    high_v: float = 0.90,
-    low_s: float = 0.25,
-    mid_s: float = 0.60,
-    high_s: float = 0.90,
-) -> tuple[ColorRGB, ColorRGB, ColorRGB]:
+    low_alpha: float = 0.25,
+    muted_sat: float = 0.25,
+    muted_val: float = 0.50,
+    high_sat: float = 0.90,
+    high_val: float = 0.90,
+    cohesion_with: Optional[ColorRGB] = None,
+    cohesion_alpha: float = 0.0,
+    include_extremes: bool = False,
+) -> AnchorVariants:
     """
-    Generate (low, mid, high) variants from a single anchor color.
+    Generate variants from a single anchor color.
 
-    Uses anchor hue and maps saturation/value into provided bands.
+    Returns low/muted/high plus optional very_low/very_high when include_extremes=True.
     """
     h, s, v = rgb_to_hsv(anchor)
 
-    low = hsv_to_rgb(h, clamp01(low_s * s), clamp01(low_v))
-    mid = hsv_to_rgb(h, clamp01(mid_s * s), clamp01(mid_v))
-    high = hsv_to_rgb(h, clamp01(high_s * s), clamp01(high_v))
-    return low, mid, high
+    low = blend_rgb(anchor, ColorRGB(0, 0, 0), clamp01(low_alpha))
+    muted = hsv_to_rgb(h, clamp01(s * muted_sat), clamp01(muted_val))
+    high = hsv_to_rgb(h, clamp01(s * high_sat), clamp01(high_val))
+
+    very_low = None
+    very_high = None
+    if include_extremes:
+        very_low = blend_rgb(anchor, ColorRGB(0, 0, 0), clamp01(low_alpha * 2.0))
+        very_high = blend_rgb(anchor, ColorRGB(255, 255, 255), 0.35)
+
+    low = _cohere(low, cohesion_with, cohesion_alpha)
+    muted = _cohere(muted, cohesion_with, cohesion_alpha)
+    high = _cohere(high, cohesion_with, cohesion_alpha)
+    if very_low is not None:
+        very_low = _cohere(very_low, cohesion_with, cohesion_alpha)
+    if very_high is not None:
+        very_high = _cohere(very_high, cohesion_with, cohesion_alpha)
+
+    return AnchorVariants(low=low, muted=muted, high=high, very_low=very_low, very_high=very_high)
 
 
-def fg_variants(bg: ColorRGB) -> tuple[ColorRGB, ColorRGB]:
+def fg_variants(
+    fg: ColorRGB,
+    *,
+    muted_alpha: float = 0.6,
+    high_alpha: float = 0.3,
+    toward: Optional[ColorRGB] = None,
+) -> tuple[ColorRGB, ColorRGB]:
     """
-    Return (primary_fg, secondary_fg) for a background.
-
-    Secondary foreground is a blended version used for quieter labels/metadata.
+    Return (muted_fg, high_fg) by blending toward a target color.
     """
-    fg = auto_fg_color(bg)
-    secondary = blend_rgb(fg, bg, 0.35)
-    return fg, secondary
+    base = toward if toward is not None else fg
+    muted = blend_rgb(fg, base, clamp01(muted_alpha))
+    high = blend_rgb(fg, base, clamp01(high_alpha))
+    return muted, high
 
 
 # ─────────────────────────────────────────────────────────────
@@ -291,14 +328,14 @@ class ColorVariants:
 
         Internally delegates to helpers in this module.
         """
-        low, mid, high = variants_from_anchor(anchor)
-        fg_primary, fg_secondary = fg_variants(mid)
+        vars_ = variants_from_anchor(anchor)
+        fg_primary, fg_secondary = fg_variants(vars_.muted, toward=anchor)
 
         return cls(
             anchor=anchor,
-            low=low,
-            mid=mid,
-            high=high,
+            low=vars_.low,
+            mid=vars_.muted,
+            high=vars_.high,
             fg_primary=fg_primary,
             fg_secondary=fg_secondary,
             accent_low=accent_low(anchor),

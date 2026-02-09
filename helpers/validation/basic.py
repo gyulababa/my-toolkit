@@ -18,7 +18,6 @@ from .mapping import (
     require_list,
     require_list_of_dicts,
     require_list_of_str,
-    require_one_of,
     require_path,
     require_port,
     require_regex,
@@ -86,6 +85,7 @@ __all__ = [
     "require_list_of_str",
     "require_dict_of_str",
     "require_one_of",
+    "require_unique",
     "require_path",
     "require_regex",
     "require_ip",
@@ -108,3 +108,17 @@ __all__ = [
     # internal (compat)
     "_MISSING",
 ]
+
+
+def require_unique(
+    items,
+    key_fn,
+    *,
+    what: str = "value",
+    path: str = "items",
+) -> None:
+    return ensure_unique(items, key_fn, what=what, path=path)
+
+
+def require_one_of(value, allowed, *, path: str = "value"):
+    return ensure_one_of(value, allowed, path=path)

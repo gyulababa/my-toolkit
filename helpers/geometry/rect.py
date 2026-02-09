@@ -31,13 +31,23 @@ class RectF:
         """Return y + h."""
         return self.y + self.h
 
+    @property
+    def x2(self) -> float:
+        return self.right()
+
+    @property
+    def y2(self) -> float:
+        return self.bottom()
+
     def contains(self, px: float, py: float) -> bool:
         """Return True if (px, py) lies inside this rectangle."""
         return (self.x <= px <= self.right()) and (self.y <= py <= self.bottom())
 
     def inset(self, dx: float, dy: float) -> "RectF":
         """Return a rectangle inset by (dx, dy) on all sides."""
-        return RectF(self.x + dx, self.y + dy, self.w - 2 * dx, self.h - 2 * dy)
+        w = max(0.0, self.w - 2 * dx)
+        h = max(0.0, self.h - 2 * dy)
+        return RectF(self.x + dx, self.y + dy, w, h)
 
     def inflate(self, dx: float, dy: float) -> "RectF":
         """Return a rectangle expanded by (dx, dy) on all sides."""
@@ -50,11 +60,26 @@ def clamp_rect_to_bounds(r: RectF, bounds: RectF) -> RectF:
 
     This is useful for keeping viewports/ROIs within a known surface.
     """
-    x0 = clamp(r.x, bounds.x, bounds.right())
-    y0 = clamp(r.y, bounds.y, bounds.bottom())
-    x1 = clamp(r.right(), bounds.x, bounds.right())
-    y1 = clamp(r.bottom(), bounds.y, bounds.bottom())
-    return RectF(x0, y0, max(0.0, x1 - x0), max(0.0, y1 - y0))
+    bw = bounds.w
+    bh = bounds.h
+    if bw <= 0 or bh <= 0:
+        return RectF(bounds.x, bounds.y, 0.0, 0.0)
+
+    if r.w >= bw:
+        x = bounds.x
+        w = bw
+    else:
+        x = clamp(r.x, bounds.x, bounds.x + bw - r.w)
+        w = r.w
+
+    if r.h >= bh:
+        y = bounds.y
+        h = bh
+    else:
+        y = clamp(r.y, bounds.y, bounds.y + bh - r.h)
+        h = r.h
+
+    return RectF(x, y, max(0.0, w), max(0.0, h))
 
 
 def fit_aspect(
@@ -63,7 +88,7 @@ def fit_aspect(
     dst_w: float,
     dst_h: float,
     mode: Literal["contain", "cover"] = "contain",
-) -> tuple[float, float]:
+) -> tuple[float, float, float, float]:
     """
     Compute a scaled size that preserves source aspect ratio within/outside a destination.
 
@@ -72,7 +97,7 @@ def fit_aspect(
       - "cover": crop (covers destination fully)
     """
     if src_w <= 0 or src_h <= 0 or dst_w <= 0 or dst_h <= 0:
-        return 0.0, 0.0
+        return 0.0, 0.0, 0.0, 0.0
 
     src_aspect = src_w / src_h
     dst_aspect = dst_w / dst_h
@@ -86,7 +111,9 @@ def fit_aspect(
         h = dst_h
         w = dst_h * src_aspect
 
-    return w, h
+    x = (dst_w - w) * 0.5
+    y = (dst_h - h) * 0.5
+    return x, y, w, h
 
 
 def fit_aspect_rect(
@@ -106,7 +133,7 @@ def fit_aspect_rect(
       - 0.5: center
       - 1.0: right/bottom
     """
-    w, h = fit_aspect(src_w, src_h, dst.w, dst.h, mode=mode)
+    _, _, w, h = fit_aspect(src_w, src_h, dst.w, dst.h, mode=mode)
     x = dst.x + (dst.w - w) * clamp(align_x, 0.0, 1.0)
     y = dst.y + (dst.h - h) * clamp(align_y, 0.0, 1.0)
     return RectF(x, y, w, h)
@@ -119,8 +146,16 @@ def fit_aspect_rect(
 # ─────────────────────────────────────────────────────────────
 
 
-def normalize_xyxy(x0: float, y0: float, x1: float, y1: float) -> tuple[float, float, float, float]:
+def normalize_xyxy(
+    x0: float | Iterable[float],
+    y0: float | None = None,
+    x1: float | None = None,
+    y1: float | None = None,
+) -> tuple[float, float, float, float]:
     """Return XYXY ordered so that x0<=x1 and y0<=y1."""
+    if y0 is None and x1 is None and y1 is None:
+        x0, y0, x1, y1 = tuple(x0)  # type: ignore[misc]
+    assert y0 is not None and x1 is not None and y1 is not None
     return (min(x0, x1), min(y0, y1), max(x0, x1), max(y0, y1))
 
 
@@ -131,20 +166,36 @@ def xyxy_is_valid(x0: float, y0: float, x1: float, y1: float) -> bool:
 
 
 def clamp_xyxy_to_bounds(
-    x0: float,
-    y0: float,
-    x1: float,
-    y1: float,
+    x0: float | Iterable[float],
+    y0: float | None = None,
+    x1: float | None = None,
+    y1: float | None = None,
     *,
-    w: float,
-    h: float,
+    w: float | None = None,
+    h: float | None = None,
+    min_x: float | None = None,
+    min_y: float | None = None,
+    max_x: float | None = None,
+    max_y: float | None = None,
 ) -> tuple[float, float, float, float]:
     """Clamp XYXY coordinates to stay within [0..w]x[0..h]."""
+    if y0 is None and x1 is None and y1 is None:
+        x0, y0, x1, y1 = tuple(x0)  # type: ignore[misc]
+    assert y0 is not None and x1 is not None and y1 is not None
+
+    if w is not None or h is not None:
+        if w is None or h is None:
+            raise ValueError("Both w and h must be provided together")
+        min_x, min_y, max_x, max_y = 0.0, 0.0, w, h
+    else:
+        if min_x is None or min_y is None or max_x is None or max_y is None:
+            raise ValueError("min_x/min_y/max_x/max_y must be provided")
+
     x0, y0, x1, y1 = normalize_xyxy(x0, y0, x1, y1)
-    x0 = clamp(x0, 0.0, w)
-    y0 = clamp(y0, 0.0, h)
-    x1 = clamp(x1, 0.0, w)
-    y1 = clamp(y1, 0.0, h)
+    x0 = clamp(x0, min_x, max_x)
+    y0 = clamp(y0, min_y, max_y)
+    x1 = clamp(x1, min_x, max_x)
+    y1 = clamp(y1, min_y, max_y)
     return x0, y0, x1, y1
 
 

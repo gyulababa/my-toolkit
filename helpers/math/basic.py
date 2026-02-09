@@ -40,9 +40,11 @@ def clamp8(v: int) -> int:
     return int(clamp(int(v), 0, 255))
 
 
-def clamp_int(v: int, lo: int, hi: int) -> int:
-    """Clamp integer v into [lo..hi]."""
-    return lo if v < lo else hi if v > hi else v
+def clamp_int(v: float, lo: int, hi: int) -> int:
+    """Clamp numeric v into [lo..hi], then truncate to int."""
+    if lo > hi:
+        lo, hi = hi, lo
+    return int(clamp(float(v), lo, hi))
 
 
 def lerp(a: float, b: float, t: float) -> float:
@@ -57,7 +59,7 @@ def inv_lerp(a: float, b: float, v: float) -> float:
     return (v - a) / (b - a)
 
 
-def remap(in_a: float, in_b: float, out_a: float, out_b: float, v: float) -> float:
+def remap(v: float, in_a: float, in_b: float, out_a: float, out_b: float) -> float:
     """Remap v from range [in_a..in_b] into [out_a..out_b]."""
     t = inv_lerp(in_a, in_b, v)
     return lerp(out_a, out_b, t)

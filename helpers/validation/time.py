@@ -33,7 +33,13 @@ def parse_time_of_day(s: str) -> dtime:
     Raises:
       ValidationError on invalid formats or ranges.
     """
-    parts = s.strip().split(":")
+    raw = s.strip()
+    if not re.fullmatch(r"\d{2}:\d{2}(:\d{2})?", raw):
+        raise ValidationError(
+            f"Invalid time-of-day format: {s!r} (expected 'HH:MM' or 'HH:MM:SS')"
+        )
+
+    parts = raw.split(":")
     if len(parts) not in (2, 3):
         raise ValidationError(
             f"Invalid time-of-day format: {s!r} (expected 'HH:MM' or 'HH:MM:SS')"

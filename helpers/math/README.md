@@ -25,7 +25,7 @@ Small numeric primitives used across the helpers package:
 - `clamp_int(v, lo, hi) -> int`
 - `lerp(a, b, t) -> float`
 - `inv_lerp(a, b, v) -> float`
-- `remap(in_a, in_b, out_a, out_b, v) -> float`
+- `remap(v, in_a, in_b, out_a, out_b) -> float`
 - `safe_div(n, d, default=0.0) -> float`
 - `round_int(v) -> int`
 - `wrap_index(i, n) -> int`
