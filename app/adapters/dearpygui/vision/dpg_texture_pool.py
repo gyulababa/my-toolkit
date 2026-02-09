@@ -1,11 +1,11 @@
-# services/vision/dpg_texture_pool.py
+# app/adapters/dearpygui/vision/dpg_texture_pool.py
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Dict, Optional, Tuple
 
-from services.vision.dpg_texture import DpgTexture
+from app.adapters.dearpygui.vision.dpg_texture import DpgTexture
 
 
 @dataclass(frozen=True)

@@ -1,4 +1,4 @@
-# services/vision/dpg_texture.py
+# app/adapters/dearpygui/vision/dpg_texture.py
 # UPDATED: supports creating textures under a provided texture_registry tag.
 
 from __future__ import annotations

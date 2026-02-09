@@ -14,8 +14,8 @@ from preview_vision.config_io import build_source_from_config, capture_config_fr
 from services.vision.preview_session import VisionPreviewSession
 
 from services.vision.stage_surface import StageSurface, StageSurfaceSpec
-from services.vision.dpg_texture_pool import DpgTexturePool
-from services.vision.dpg_draw_backend import DpgDrawBackend
+from app.adapters.dearpygui.vision.dpg_texture_pool import DpgTexturePool
+from app.adapters.dearpygui.vision.dpg_draw_backend import DpgDrawBackend
 from services.vision.viewport_compositor import ViewportCompositor
 
 

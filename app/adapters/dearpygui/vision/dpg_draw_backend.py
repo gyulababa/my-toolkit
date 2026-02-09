@@ -1,11 +1,11 @@
-# services/vision/dpg_draw_backend.py
+# app/adapters/dearpygui/vision/dpg_draw_backend.py
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Optional, Sequence, Tuple
 
-from services.vision.dpg_texture_pool import TextureRef
+from app.adapters.dearpygui.vision.dpg_texture_pool import TextureRef
 
 Point = Tuple[float, float]
 RGBA = Tuple[int, int, int, int]
