@@ -7,7 +7,7 @@ from pathlib import Path
 
 from .domain import BaseDomainService
 from helpers.persist import PersistedCatalogLoader
-from helpers.catalogloader import CatalogLoader
+from helpers.persist import CatalogLoader
 
 # These will come from helpers.tags.* once you implement them
 # validate_tag_catalog(raw) -> TagCatalogDoc

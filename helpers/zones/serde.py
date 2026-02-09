@@ -10,7 +10,7 @@ JSON load/save utilities for the Zones Preset Library document.
 Design goals:
 - Dependency-light: stdlib json + helpers.zones.schema
 - Frontend-agnostic
-- Optional integration with helpers.catalogloader (if present), but not required
+- Optional integration with helpers.persist (if present), but not required
 
 Conventions:
 - Templates live under: helpers/templates/zones/
@@ -91,14 +91,14 @@ def try_load_zones_template_via_catalogloader(
     helpers_root: Optional[Path] = None,
 ) -> Optional[Dict[str, Any]]:
     """
-    If helpers.catalogloader is available, load template using that mechanism.
+    If helpers.persist is available, load template using that mechanism.
     Otherwise return None.
 
     This keeps zones.serde usable even when the catalogloader package isn't included
     in a minimal deployment.
     """
     try:
-        from helpers.catalogloader import CatalogLoader  # type: ignore
+        from helpers.persist import CatalogLoader  # type: ignore
     except Exception:
         return None
 

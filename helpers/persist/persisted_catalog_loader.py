@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any, Callable, Dict, Generic, Optional, TypeVar
 
 from helpers.catalog import Catalog, EditableCatalog
-from helpers.catalogloader.loader import CatalogLoader
+from .catalog_loader import CatalogLoader
 from helpers.validation import ValidationError
 
 from .index import (

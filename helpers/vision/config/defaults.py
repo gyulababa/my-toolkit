@@ -4,7 +4,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Optional
 
-from helpers.catalogloader import CatalogLoader
+from helpers.persist import CatalogLoader
 from helpers.catalog import Catalog, EditableCatalog
 
 from .schema import VisionConfig, ensure_vision_config

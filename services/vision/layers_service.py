@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-from helpers.catalogloader.loader import CatalogLoader 
+from helpers.persist import CatalogLoader
 from helpers.catalog import EditableCatalog
 
 from services.domain.base_domain_service import BaseDomainService 

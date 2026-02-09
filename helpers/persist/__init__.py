@@ -31,6 +31,7 @@ from .index import (
     with_domain_lock,
 )
 from .persisted_catalog_loader import PersistedCatalogLoader
+from .catalog_loader import CatalogLoader
 
 __all__ = [
     # types
@@ -67,4 +68,5 @@ __all__ = [
     "with_domain_lock",
     # adapters
     "PersistedCatalogLoader",
+    "CatalogLoader",
 ]
