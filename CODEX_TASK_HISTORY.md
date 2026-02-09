@@ -56,3 +56,4 @@ Codex must:
 - [x] ID=T0111 STATUS=DONE TYPE=refactor SCOPE=services/vision/stage_surface.py VERIFY="pytest -q" DESC="Relocate StageSurface to app/adapters/dearpygui/vision and update all imports" COMMIT=fc885d7 DATE=2026-02-09
 - [x] ID=T0112 STATUS=DONE TYPE=refactor SCOPE=services/vision/viewport_compositor.py VERIFY="pytest -q" DESC="Relocate ViewportCompositor to app/adapters/dearpygui/vision and update all imports" COMMIT=7fe63ff DATE=2026-02-09
 - [x] ID=T0113 STATUS=DONE TYPE=fix SCOPE=helpers/vision/transforms.py VERIFY="pytest -q" DESC="Fix crop rect parameter contract mismatch by supporting xywh_norm or converting rect_norm [x,y,w,h] to xyxy before crop" COMMIT=3eb5f27 DATE=2026-02-09
+- [x] ID=T0114 STATUS=DONE TYPE=test SCOPE=tests/vision/test_transforms_crop.py VERIFY="pytest -q" DESC="Add unit tests covering crop rect normalization for both rect_norm (xywh) and xyxy semantics" COMMIT=5437f16 DATE=2026-02-09
