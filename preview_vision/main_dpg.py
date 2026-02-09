@@ -13,7 +13,7 @@ from helpers.runtime.optional_imports import require
 from preview_vision.config_io import build_source_from_config, capture_config_from_vision, load_vision_config
 from services.vision.preview_session import VisionPreviewSession
 
-from services.vision.stage_surface import StageSurface, StageSurfaceSpec
+from app.adapters.dearpygui.vision.stage_surface import StageSurface, StageSurfaceSpec
 from app.adapters.dearpygui.vision.dpg_texture_pool import DpgTexturePool
 from app.adapters.dearpygui.vision.dpg_draw_backend import DpgDrawBackend
 from services.vision.viewport_compositor import ViewportCompositor

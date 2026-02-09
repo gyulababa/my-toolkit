@@ -1,4 +1,4 @@
-# services/vision/stage_surface.py
+# app/adapters/dearpygui/vision/stage_surface.py
 
 from __future__ import annotations
 
