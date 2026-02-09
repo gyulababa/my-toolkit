@@ -12,10 +12,14 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional, Tuple
 
-from helpers.catalog import Catalog
+from helpers.catalog import Catalog, EditableCatalog
 from helpers.persist.catalog_loader import CatalogLoader
 from helpers.validation import ValidationError
 
+try:
+    from CSVcleaner.run_report import CleaningRunReport, RUN_REPORT_PERSIST
+except ModuleNotFoundError:
+    from run_report import CleaningRunReport, RUN_REPORT_PERSIST
 
 # Keep your default script logic
 CLEANER_SCRIPT_DEFAULT = str(Path(__file__).resolve().parent.parent / "clean_csv_generic.py")
@@ -324,6 +328,7 @@ async def run_quickrun_async(
     *,
     cleaner_script: str = CLEANER_SCRIPT_DEFAULT,
     only_if_defaults_exist: bool = True,
+    persist_root: Optional[str | Path] = None,
 ) -> Dict[str, Dict[str, Any]]:
     if quickrun_id not in cfg.quickruns:
         raise KeyError(f"Unknown quickrun id: {quickrun_id}")
@@ -341,6 +346,25 @@ async def run_quickrun_async(
 
         code, out, err = await run_recipe_async(r, cleaner_script=cleaner_script)
         results[rid] = {"ok": code == 0, "returncode": code, "stdout": out, "stderr": err}
+
+    if persist_root:
+        report = CleaningRunReport(
+            tool="cleaner_runner",
+            quickrun_id=quickrun_id,
+            recipe_ids=list(cfg.quickruns[quickrun_id]),
+            results=results,
+        )
+        editable = EditableCatalog.from_catalog(
+            report,
+            RUN_REPORT_PERSIST.loader.dump,
+            schema_name=RUN_REPORT_PERSIST.loader.schema_name,
+            schema_version=RUN_REPORT_PERSIST.loader.schema_version,
+        )
+        RUN_REPORT_PERSIST.save_new_revision(
+            Path(persist_root),
+            editable,
+            note=f"quickrun:{quickrun_id}",
+        )
 
     return results
 
@@ -361,6 +385,7 @@ def main() -> int:
     p_qr = sub.add_parser("quickrun", help="Run a quickrun")
     p_qr.add_argument("--id", required=True, help="Quickrun id")
     p_qr.add_argument("--force", action="store_true", help="Run even if default input paths missing")
+    p_qr.add_argument("--persist-root", default="", help="Persist a run report under this root")
 
     args = ap.parse_args()
 
@@ -412,6 +437,7 @@ def main() -> int:
                 qid,
                 cleaner_script=args.cleaner,
                 only_if_defaults_exist=only_if_defaults_exist,
+                persist_root=args.persist_root.strip() or None,
             ))
         except KeyError as e:
             print(f"ERROR: {e}", file=sys.stderr)
