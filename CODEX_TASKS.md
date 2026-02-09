@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0119 STATUS=TODO TYPE=doc SCOPE=HELPERS_API.md VERIFY="pytest -q" DESC="Document layering rule that services must not import apps and GUI adapters must live outside services"
 - [ ] ID=T0120 STATUS=TODO TYPE=doc SCOPE=services/vision/dpg_texture_pool.py VERIFY="pytest -q" DESC="Document TextureRef lifetime and resize retag behavior to prevent stale texture tag caching"
 - [ ] ID=T0121 STATUS=TODO TYPE=chore SCOPE=services/vision/persist_impl.py VERIFY="pytest -q" DESC="Remove obsolete contentReference artifacts and normalize module comments"
 

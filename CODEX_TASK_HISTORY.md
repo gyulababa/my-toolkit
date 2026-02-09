@@ -61,3 +61,4 @@ Codex must:
 - [x] ID=T0116 STATUS=DONE TYPE=fix SCOPE=services/vision/annotations_service.py VERIFY="pytest -q" DESC="Fix malformed import line(s) and ensure module imports cleanly without stray artifacts" COMMIT=18e7dce DATE=2026-02-09
 - [x] ID=T0117 STATUS=DONE TYPE=refactor SCOPE=services/vision/catalog_seed.py VERIFY="pytest -q" DESC="Move repo-layout-dependent seed loader out of services and make seeding accept explicit helpers_root if kept reusable" COMMIT=dc9423e DATE=2026-02-09
 - [x] ID=T0118 STATUS=DONE TYPE=refactor SCOPE=preview_vision/config_io.py VERIFY="pytest -q" DESC="Make preview_vision the sole owner of config IO wiring and pass built sources/config into services via injection" COMMIT=ee275ea DATE=2026-02-09
+- [x] ID=T0119 STATUS=DONE TYPE=doc SCOPE=HELPERS_API.md VERIFY="pytest -q" DESC="Document layering rule that services must not import apps and GUI adapters must live outside services" COMMIT=350c306 DATE=2026-02-09
