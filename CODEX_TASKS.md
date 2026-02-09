@@ -28,6 +28,19 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
+- [ ] ID=T0109 STATUS=TODO TYPE=refactor SCOPE=services/vision VERIFY="pytest -q" DESC="Introduce services.vision interfaces/types for FrameSource factory and config loader to keep preview app as wiring only"
+- [ ] ID=T0110 STATUS=TODO TYPE=refactor SCOPE=services/vision/dpg_* VERIFY="pytest -q" DESC="Move DearPyGui-specific modules out of services/vision into app/adapters/dearpygui/vision"
+- [ ] ID=T0111 STATUS=TODO TYPE=refactor SCOPE=services/vision/stage_surface.py VERIFY="pytest -q" DESC="Relocate StageSurface to app/adapters/dearpygui/vision and update all imports"
+- [ ] ID=T0112 STATUS=TODO TYPE=refactor SCOPE=services/vision/viewport_compositor.py VERIFY="pytest -q" DESC="Relocate ViewportCompositor to app/adapters/dearpygui/vision and update all imports"
+- [ ] ID=T0113 STATUS=TODO TYPE=fix SCOPE=helpers/vision/transforms.py VERIFY="pytest -q" DESC="Fix crop rect parameter contract mismatch by supporting xywh_norm or converting rect_norm [x,y,w,h] to xyxy before crop"
+- [ ] ID=T0114 STATUS=TODO TYPE=test SCOPE=tests/vision/test_transforms_crop.py VERIFY="pytest -q" DESC="Add unit tests covering crop rect normalization for both rect_norm (xywh) and xyxy semantics"
+- [ ] ID=T0115 STATUS=TODO TYPE=fix SCOPE=services/vision/layers_service.py VERIFY="pytest -q" DESC="Fix malformed import line(s) and ensure module imports cleanly without stray artifacts"
+- [ ] ID=T0116 STATUS=TODO TYPE=fix SCOPE=services/vision/annotations_service.py VERIFY="pytest -q" DESC="Fix malformed import line(s) and ensure module imports cleanly without stray artifacts"
+- [ ] ID=T0117 STATUS=TODO TYPE=refactor SCOPE=services/vision/catalog_seed.py VERIFY="pytest -q" DESC="Move repo-layout-dependent seed loader out of services and make seeding accept explicit helpers_root if kept reusable"
+- [ ] ID=T0118 STATUS=TODO TYPE=refactor SCOPE=preview_vision/config_io.py VERIFY="pytest -q" DESC="Make preview_vision the sole owner of config IO wiring and pass built sources/config into services via injection"
+- [ ] ID=T0119 STATUS=TODO TYPE=doc SCOPE=HELPERS_API.md VERIFY="pytest -q" DESC="Document layering rule that services must not import apps and GUI adapters must live outside services"
+- [ ] ID=T0120 STATUS=TODO TYPE=doc SCOPE=services/vision/dpg_texture_pool.py VERIFY="pytest -q" DESC="Document TextureRef lifetime and resize retag behavior to prevent stale texture tag caching"
+- [ ] ID=T0121 STATUS=TODO TYPE=chore SCOPE=services/vision/persist_impl.py VERIFY="pytest -q" DESC="Remove obsolete contentReference artifacts and normalize module comments"
 
 
 ---
