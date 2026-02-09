@@ -12,6 +12,7 @@ Primary mode: SAFE REFACTOR + ARCHITECTURE ENFORCEMENT + TEST GUARDRAILS
 - Each completed task must be marked DONE in CODEX_TASKS.md and must include:
   COMMIT=<sha> and DATE=<YYYY-MM-DD>.
 - If blocked, set STATUS=SKIP and record a short rationale in the final summary.
+- After any run, all STATUS=DONE tasks must be copied verbatim into CODEX_TASK_HISTORY.md and removed from CODEX_TASKS.md (append-only history).
 
 # Task Registry Format Protection
 
