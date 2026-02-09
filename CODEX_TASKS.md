@@ -28,6 +28,8 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 ## Task Registry
 
 - [x] ID=T0103 STATUS=DONE TYPE=doc SCOPE=CODEX_* VERIFY="pytest -q" DESC="Doc maintenance: remove completed items from CODEX_FUTURE_PLANS.md; create CODEX_TASK_HISTORY.md using the same registry line format; move all STATUS=DONE tasks from CODEX_TASKS.md into CODEX_TASK_HISTORY.md without rewriting their fields" COMMIT=9dade7d DATE=2026-02-09
+- [x] ID=T0104 STATUS=DONE TYPE=doc SCOPE=AGENTS.md VERIFY="pytest -q" DESC="Update AGENTS.md: add Commit SHA Registry Rule section allowing exactly one git commit --amend --no-edit solely to inject COMMIT=<sha> into registry/history task lines" COMMIT=a3bc25a DATE=2026-02-09
+
 
 ---
 

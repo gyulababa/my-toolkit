@@ -67,6 +67,17 @@ Never mix behavior change with refactor in the same commit.
 
 ---
 
+# 2.a Commit SHA Registry Rule
+
+Allowed:
+- exactly one `git commit --amend --no-edit` per task, solely to inject COMMIT=<sha> into registry/history task lines
+
+Not allowed:
+- any other amendments
+- altering files unrelated to registry/history task lines during the amend
+
+---
+
 # 3. Verification Rules
 
 After every phase:
