@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "presets": {
+    "default": {
+      "meta": { "name": "Default Preset", "tags": [] },
+      "zones": {
+        "zone_1": {
+          "enabled": true,
+          "intent": "generic",
+          "geometry": { "type": "rect_norm", "xyxy": [0.1, 0.1, 0.4, 0.4] },
+          "tags": [],
+          "style": {},
+          "consumers": {}
+        }
+      }
+    }
+  }
+}

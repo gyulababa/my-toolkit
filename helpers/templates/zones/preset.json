@@ -1,0 +1,13 @@
+{
+  "meta": { "name": "Example Preset", "tags": [] },
+  "zones": {
+    "example_zone": {
+      "enabled": true,
+      "intent": "generic",
+      "geometry": { "type": "rect_norm", "xyxy": [0.2, 0.2, 0.8, 0.8] },
+      "tags": ["example"],
+      "style": {},
+      "consumers": {}
+    }
+  }
+}

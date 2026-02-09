@@ -1,0 +1,67 @@
+{
+  "schema": "vision.annotation_catalog.v1",
+  "meta": {
+    "name": "Default Vision Annotations",
+    "description": "Default ROIs and overlay annotations",
+    "scope": "vision_preview"
+  },
+  "sets": [
+    {
+      "id": "zones_default",
+      "name": "Zones (Default)",
+      "enabled": true,
+      "tags": ["scope:zones"],
+      "annotations": [
+        {
+          "id": "roi_main",
+          "kind": "roi",
+          "name": "Main ROI",
+          "space": "src",
+          "rect": { "x": 120.0, "y": 80.0, "w": 640.0, "h": 360.0 },
+          "tags": ["scope:zones", "roi:main"]
+        },
+        {
+          "id": "roi_secondary",
+          "kind": "roi",
+          "name": "Secondary ROI",
+          "space": "src",
+          "rect": { "x": 520.0, "y": 180.0, "w": 160.0, "h": 120.0 },
+          "tags": ["scope:zones", "roi:secondary"]
+        }
+      ]
+    },
+    {
+      "id": "debug_overlays",
+      "name": "Debug Overlays",
+      "enabled": true,
+      "tags": ["debug"],
+      "annotations": [
+        {
+          "id": "hud_anchor",
+          "kind": "text",
+          "space": "norm",
+          "anchor": [0.02, 0.02],
+          "text": "HUD",
+          "tags": ["debug:hud"],
+          "style": {
+            "text_rgba": [255, 255, 255, 255],
+            "font_px": 16,
+            "shadow_rgba": [0, 0, 0, 180],
+            "shadow_offset_px": [1, 1]
+          }
+        },
+        {
+          "id": "guides_default",
+          "kind": "guides",
+          "space": "src",
+          "guides": {
+            "crosshair": true,
+            "rule_of_thirds": true,
+            "safe_margin_pct": 0.05
+          },
+          "tags": ["debug:guides"]
+        }
+      ]
+    }
+  ]
+}

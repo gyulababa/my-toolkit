@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "pipeline": {
+    "source": {
+      "driver": "uvc_opencv",
+      "params": {
+        "device_index": 0,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "fourcc": null,
+        "target_fps": null,
+        "backend": "dshow"
+      }
+    },
+    "transforms": [
+      {
+        "name": "ensure_rgb8",
+        "params": {}
+      }
+    ]
+  }
+}

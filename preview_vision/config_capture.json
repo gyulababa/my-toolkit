@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "pipeline": {
+    "source": {
+      "driver": "screen_mss",
+      "params": {
+        "monitor": 1,
+        "target_fps": null
+      }
+    },
+    "transforms": [
+      {
+        "name": "ensure_rgb8",
+        "params": {}
+      }
+    ]
+  }
+}

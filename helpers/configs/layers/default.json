@@ -1,0 +1,121 @@
+{
+  "schema": "vision.layer_catalog.v1",
+  "meta": {
+    "name": "Default Vision Layers",
+    "description": "Base layer stack for vision preview",
+    "scope": "vision_preview"
+  },
+  "viewport": {
+    "fit_mode": "contain",
+    "background_rgba": [0, 0, 0, 255],
+    "show_letterbox": true
+  },
+  "style_presets": {
+    "bbox_default": {
+      "stroke_rgba": [0, 255, 0, 255],
+      "fill_rgba": [0, 255, 0, 40],
+      "stroke_width": 2
+    },
+    "bbox_warning": {
+      "stroke_rgba": [255, 180, 0, 255],
+      "fill_rgba": [255, 180, 0, 40],
+      "stroke_width": 3
+    },
+    "text_default": {
+      "text_rgba": [255, 255, 255, 255],
+      "font_px": 16,
+      "shadow_rgba": [0, 0, 0, 180],
+      "shadow_offset_px": [1, 1]
+    },
+    "guides": {
+      "stroke_rgba": [255, 255, 255, 120],
+      "stroke_width": 1
+    }
+  },
+  "layers": [
+    {
+      "id": "video",
+      "name": "Video",
+      "kind": "video",
+      "z": 0,
+      "enabled": true,
+      "opacity": 1.0,
+      "source": { "type": "frame" }
+    },
+    {
+      "id": "bboxes",
+      "name": "Bounding Boxes",
+      "kind": "vector",
+      "z": 20,
+      "enabled": true,
+      "opacity": 1.0,
+      "filters": {
+        "kinds": ["bbox"]
+      },
+      "style": {
+        "preset": "bbox_default"
+      },
+      "render": {
+        "draw_labels": true,
+        "label_format": "{label} {conf:.2f}",
+        "label_anchor": "top_left",
+        "label_style_preset": "text_default"
+      }
+    },
+    {
+      "id": "rois",
+      "name": "Regions of Interest",
+      "kind": "vector",
+      "z": 30,
+      "enabled": true,
+      "opacity": 1.0,
+      "filters": {
+        "kinds": ["roi"],
+        "require_tags_any": ["scope:zones"]
+      },
+      "style": {
+        "preset": "bbox_warning"
+      },
+      "render": {
+        "draw_labels": true,
+        "label_format": "{name}",
+        "label_anchor": "top_left",
+        "label_style_preset": "text_default"
+      }
+    },
+    {
+      "id": "guides",
+      "name": "Guides",
+      "kind": "vector",
+      "z": 90,
+      "enabled": false,
+      "opacity": 1.0,
+      "filters": {
+        "kinds": ["guides"]
+      },
+      "style": {
+        "preset": "guides"
+      },
+      "render": {
+        "rule_of_thirds": true,
+        "crosshair": true,
+        "safe_margin_pct": 0.05
+      }
+    },
+    {
+      "id": "debug_text",
+      "name": "Debug Text",
+      "kind": "vector",
+      "z": 100,
+      "enabled": true,
+      "opacity": 1.0,
+      "filters": {
+        "kinds": ["text"],
+        "require_tags_any": ["debug:hud"]
+      },
+      "style": {
+        "preset": "text_default"
+      }
+    }
+  ]
+}
