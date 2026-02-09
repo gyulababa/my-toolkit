@@ -75,7 +75,7 @@ class PersistedCatalogLoader(Generic[DocT]):
         persist_root: Path,
         doc_id: str,
         *,
-        history=None,
+        history: Optional[Any] = None,
     ) -> EditableCatalog[DocT]:
         """Load a specific persisted revision into an EditableCatalog (no promotion)."""
         raw = self.load_revision_raw(persist_root, doc_id)
@@ -114,7 +114,7 @@ class PersistedCatalogLoader(Generic[DocT]):
             schema_version=self.loader.schema_version,
         )
 
-    def load_active_editable(self, persist_root: Path, *, history=None) -> EditableCatalog[DocT]:
+    def load_active_editable(self, persist_root: Path, *, history: Optional[Any] = None) -> EditableCatalog[DocT]:
         """Load the active doc into an EditableCatalog (caller may attach history/undo)."""
         raw = self.load_active_raw(persist_root)
         return EditableCatalog(

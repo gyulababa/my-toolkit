@@ -205,7 +205,7 @@ class CatalogLoader(Generic[DocT]):
     # ------------------------
     # Loaders into Catalog or EditableCatalog
     # ------------------------
-    def load_template_editable(self, name: str, *, history=None) -> EditableCatalog[DocT]:
+    def load_template_editable(self, name: str, *, history: Optional[Any] = None) -> EditableCatalog[DocT]:
         """Load template JSON into an EditableCatalog."""
         raw = self.load_raw(self.template_path(name))
         return EditableCatalog(
@@ -215,7 +215,7 @@ class CatalogLoader(Generic[DocT]):
             history=history,
         )
 
-    def load_config_editable(self, name: str = "default.json", *, history=None) -> EditableCatalog[DocT]:
+    def load_config_editable(self, name: str = "default.json", *, history: Optional[Any] = None) -> EditableCatalog[DocT]:
         """Load config JSON into an EditableCatalog."""
         raw = self.load_raw(self.config_path(name))
         return EditableCatalog(
