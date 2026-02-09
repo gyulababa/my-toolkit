@@ -16,7 +16,7 @@ from services.vision.preview_session import VisionPreviewSession
 from app.adapters.dearpygui.vision.stage_surface import StageSurface, StageSurfaceSpec
 from app.adapters.dearpygui.vision.dpg_texture_pool import DpgTexturePool
 from app.adapters.dearpygui.vision.dpg_draw_backend import DpgDrawBackend
-from services.vision.viewport_compositor import ViewportCompositor
+from app.adapters.dearpygui.vision.viewport_compositor import ViewportCompositor
 
 
 def parse_args() -> argparse.Namespace:

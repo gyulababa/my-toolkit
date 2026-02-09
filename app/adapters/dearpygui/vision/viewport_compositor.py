@@ -1,4 +1,4 @@
-# services/vision/viewport_compositor.py
+# app/adapters/dearpygui/vision/viewport_compositor.py
 
 from __future__ import annotations
 
