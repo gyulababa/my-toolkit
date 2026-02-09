@@ -6,9 +6,9 @@ from pathlib import Path
 from typing import Any, Dict, Optional
 
 from helpers.persist import CatalogLoader
-from helpers.catalog import EditableCatalog 
+from helpers.catalog import EditableCatalog
 
-from services.domain.base_domain_service import BaseDomainService 
+from services.domain.base_domain_service import BaseDomainService
 from services.vision.persist_impl import PersistedCatalogLoader
 
 from helpers.vision.overlays.validators import validate_annotation_catalog, dump_identity
