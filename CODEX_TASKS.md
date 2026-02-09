@@ -27,14 +27,7 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [x] ID=T0001 STATUS=DONE TYPE=test SCOPE=tests/ VERIFY="pytest -q" DESC="Add architecture import guard: fail if helpers.catalogloader is imported anywhere under helpers/* except helpers/catalogloader/*; allow tests/*; allow services/* (migration backlog tracked in CATALOGLOADER_AUDIT.md)" COMMIT=748a568 DATE=2026-02-09
-- [x] ID=T0002 STATUS=DONE TYPE=test SCOPE=tests/ VERIFY="pytest -q" DESC="Add persist boundary guard test: fail if persistence markers (index.json, active_id, next_int, persist_root /) appear outside helpers/persist/* and helpers/catalogloader/*" COMMIT=e761b60 DATE=2026-02-09
-- [x] ID=T0003 STATUS=DONE TYPE=test SCOPE=tests/ VERIFY="pytest -q" DESC="Add facade deprecation warning tests: ensure importing/constructing catalogloader facade emits DeprecationWarning" COMMIT=c6b1e7f DATE=2026-02-09
-- [x] ID=T0004 STATUS=DONE TYPE=refactor SCOPE=helpers/persist/* VERIFY="pytest -q" DESC="Add missing type hints in helpers/persist (annotations only, no behavior changes)" COMMIT=759ad91 DATE=2026-02-09
-- [x] ID=T0005 STATUS=DONE TYPE=test SCOPE=tests/ VERIFY="pytest -q" DESC="Add persist roundtrip test: persist -> load -> equality, using temp dir" COMMIT=064b26b DATE=2026-02-09
-- [x] ID=T0100 STATUS=DONE TYPE=refactor SCOPE=services/ VERIFY="pytest -q" DESC="Migrate known non-test catalogloader imports listed in CATALOGLOADER_AUDIT.md to helpers.persist equivalents (mechanical import-only refactor; keep behavior)" COMMIT=c0cab83 DATE=2026-02-09
-- [x] ID=T0101 STATUS=DONE TYPE=test SCOPE=tests/ VERIFY="pytest -q" DESC="Expand architecture guard suite: enforce UI import bans and layer graph boundary checks (helpers/* frontend-agnostic)" COMMIT=d37774a DATE=2026-02-09
-- [x] ID=T0102 STATUS=DONE TYPE=chore SCOPE=tooling/ VERIFY="pytest -q" DESC="Add mypy config and incremental strictness plan (no behavior changes)" COMMIT=1e90391 DATE=2026-02-09
+- [x] ID=T0103 STATUS=DONE TYPE=doc SCOPE=CODEX_* VERIFY="pytest -q" DESC="Doc maintenance: remove completed items from CODEX_FUTURE_PLANS.md; create CODEX_TASK_HISTORY.md using the same registry line format; move all STATUS=DONE tasks from CODEX_TASKS.md into CODEX_TASK_HISTORY.md without rewriting their fields" COMMIT=9dade7d DATE=2026-02-09
 
 ---
 
