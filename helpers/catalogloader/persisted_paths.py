@@ -3,9 +3,16 @@
 
 from __future__ import annotations
 
+import warnings
 from pathlib import Path
 
 from helpers.persist.paths import domain_dir, index_path, doc_path
+
+warnings.warn(
+    "helpers.catalogloader.persisted_paths is deprecated; use helpers.persist.paths",
+    DeprecationWarning,
+    stacklevel=2,
+)
 
 __all__ = [
     "domain_root",

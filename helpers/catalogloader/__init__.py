@@ -1,6 +1,14 @@
 # helpers/catalogloader/__init__.py
 # Convention-based loaders for JSON configs/templates stored under helpers/ (templates/ + configs/).
 
+import warnings
+
+warnings.warn(
+    "helpers.catalogloader is deprecated; use helpers.persist",
+    DeprecationWarning,
+    stacklevel=2,
+)
+
 """
 helpers.catalogloader
 
