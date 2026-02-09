@@ -12,6 +12,7 @@ Primary public API:
 """
 
 from .loader import CatalogLoader
+from .persisted_index import PersistIndex, load_index, save_index
 from .persistedloader import PersistedCatalogLoader
 
-__all__ = ["CatalogLoader", "PersistedCatalogLoader"]
+__all__ = ["CatalogLoader", "PersistedCatalogLoader", "PersistIndex", "load_index", "save_index"]
