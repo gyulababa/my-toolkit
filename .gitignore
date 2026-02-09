@@ -10,3 +10,7 @@ __pycache__/
 *.bak
 *.swp
 *.zip
+scripts/CSVcleaner/README.md
+scripts/CSVcleaner/index_settings.json
+scripts/CSVcleaner/index_sources.json
+scripts/CSVcleaner/recipes.json
