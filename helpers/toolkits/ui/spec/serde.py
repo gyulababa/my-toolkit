@@ -4,9 +4,9 @@ from __future__ import annotations
 import json
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any, Dict, List, cast
+from typing import Any, Dict, cast
 
-from .model import (
+from .models import (
     CommandSpec,
     DockHint,
     MenuItem,
@@ -70,6 +70,13 @@ def load_ui_spec(path: str | Path) -> UiSpec:
 
     windows = []
     for w in raw.get("windows", []):
+        factory_args = w.get("factory_args")
+        if factory_args is not None and not isinstance(factory_args, dict):
+            raise ValueError("factory_args must be an object or null")
+        menu_path_raw = w.get("menu_path")
+        if menu_path_raw is not None and not isinstance(menu_path_raw, list):
+            raise ValueError("menu_path must be a list or null")
+
         windows.append(
             WindowSpec(
                 id=str(w["id"]),
@@ -77,7 +84,9 @@ def load_ui_spec(path: str | Path) -> UiSpec:
                 factory=str(w["factory"]),
                 drawn_on_start=bool(w.get("drawn_on_start", True)),
                 dock_hint=_parse_dock_hint(w.get("dock_hint")),
-                menu_path=(list(w["menu_path"]) if w.get("menu_path") else None),
+                menu_path=([str(x) for x in menu_path_raw] if menu_path_raw is not None else None),
+                factory_args=(dict(factory_args) if factory_args else None),
+                factory_args_ref=(str(w["factory_args_ref"]) if w.get("factory_args_ref") else None),
             )
         )
 
@@ -92,7 +101,6 @@ def load_ui_spec(path: str | Path) -> UiSpec:
 
 
 def dump_ui_spec(spec: UiSpec) -> Dict[str, Any]:
-    # Dataclasses include nested unions; we prefer explicit emission for menu items.
     def dump_menu_item(item: MenuItem) -> Dict[str, Any]:
         if isinstance(item, MenuItemCommand):
             return {"type": "command", "command_id": item.command_id}
@@ -108,11 +116,7 @@ def dump_ui_spec(spec: UiSpec) -> Dict[str, Any]:
         "version": spec.version,
         "commands": [asdict(c) for c in spec.commands],
         "menus": [
-            {
-                "id": m.id,
-                "title": m.title,
-                "items": [dump_menu_item(x) for x in m.items],
-            }
+            {"id": m.id, "title": m.title, "items": [dump_menu_item(x) for x in m.items]}
             for m in spec.menus
         ],
         "windows": [
@@ -123,6 +127,8 @@ def dump_ui_spec(spec: UiSpec) -> Dict[str, Any]:
                 "drawn_on_start": w.drawn_on_start,
                 "dock_hint": (asdict(w.dock_hint) if w.dock_hint else None),
                 "menu_path": w.menu_path,
+                "factory_args": w.factory_args,
+                "factory_args_ref": w.factory_args_ref,
             }
             for w in spec.windows
         ],
