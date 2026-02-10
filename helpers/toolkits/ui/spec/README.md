@@ -12,7 +12,7 @@ CommandSpec: a command id/title with optional kind and enable predicate key.
 
 MenuSpec: top-level menus composed of MenuItem entries (command, submenu, separator, window_toggle).
 
-WindowSpec: window id/title/factory with optional dock hints and menu path.
+WindowSpec: window id/title/factory with optional dock hints, menu path, and optional factory args.
 
 DockHint: optional adapter hint for initial docking.
 
