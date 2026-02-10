@@ -16,12 +16,14 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from app.adapters.csvcleaner.recipes import (  # noqa: E402
+from my_toolkit.toolkit_adapters.adapters.csvcleaner.recipes import (  # noqa: E402
     CleaningRecipesResolved,
     RecipeResolved,
     load_recipes_resolved,
 )
-from app.adapters.csvcleaner.run_reports import persist_quickrun_report  # noqa: E402
+from my_toolkit.toolkit_adapters.adapters.csvcleaner.run_reports import (  # noqa: E402
+    persist_quickrun_report,
+)
 
 # Keep your default script logic
 CLEANER_SCRIPT_DEFAULT = str(Path(__file__).resolve().parent.parent / "clean_csv_generic.py")

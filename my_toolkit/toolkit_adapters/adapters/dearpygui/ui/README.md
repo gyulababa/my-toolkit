@@ -1,5 +1,5 @@
-<!-- app/adapters/dearpygui/ui/README.md -->
-app/adapters/dearpygui/ui
+<!-- my_toolkit/toolkit_adapters/adapters/dearpygui/ui/README.md -->
+my_toolkit/toolkit_adapters/adapters/dearpygui/ui
 Purpose
 
 DearPyGui adapter layer for the UI toolkit. It wires the runtime session to DearPyGui widgets and persists UI state via services.ui.

@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Dict, Optional, Tuple
 
-from app.adapters.dearpygui.vision.dpg_texture import DpgTexture
+from my_toolkit.toolkit_adapters.adapters.dearpygui.vision.dpg_texture import DpgTexture
 
 
 @dataclass(frozen=True)

@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional, Sequence, Tuple
 
-from app.adapters.dearpygui.vision.dpg_texture_pool import TextureRef
+from my_toolkit.toolkit_adapters.adapters.dearpygui.vision.dpg_texture_pool import TextureRef
 
 Point = Tuple[float, float]
 RGBA = Tuple[int, int, int, int]

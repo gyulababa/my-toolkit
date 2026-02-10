@@ -2,7 +2,7 @@
 services/ui
 Purpose
 
-Domain services that bind UI state to persistence and history without depending on app adapters.
+Domain services that bind UI state to persistence and history without depending on toolkit adapters.
 
 Responsibilities
 
@@ -16,7 +16,7 @@ Boundaries
 
 May import helpers.toolkits.ui.* and helpers.persist.*
 
-Must not import app adapters or frontend frameworks.
+Must not import toolkit adapters or frontend frameworks.
 
 Public API (flat list)
 

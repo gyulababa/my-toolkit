@@ -19,9 +19,12 @@ from helpers.vision.overlays.models import (
 )
 from helpers.vision.overlays.render import render_layers
 
-from app.adapters.dearpygui.vision.stage_surface import StageSurface
-from app.adapters.dearpygui.vision.dpg_draw_backend import DpgDrawBackend
-from app.adapters.dearpygui.vision.dpg_texture_pool import DpgTexturePool, TextureRef
+from my_toolkit.toolkit_adapters.adapters.dearpygui.vision.stage_surface import StageSurface
+from my_toolkit.toolkit_adapters.adapters.dearpygui.vision.dpg_draw_backend import DpgDrawBackend
+from my_toolkit.toolkit_adapters.adapters.dearpygui.vision.dpg_texture_pool import (
+    DpgTexturePool,
+    TextureRef,
+)
 
 
 @dataclass

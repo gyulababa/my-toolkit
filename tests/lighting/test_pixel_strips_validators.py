@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import pytest
 
-from helpers.lighting.pixel_strips_model import seed_pixel_strips_doc, seed_strip_raw
-from helpers.lighting.pixel_strips_validators import validate_pixel_strips_doc
+from my_toolkit.helpers.led_pixels.pixel_strips_model import seed_pixel_strips_doc, seed_strip_raw
+from my_toolkit.helpers.led_pixels.pixel_strips_validators import validate_pixel_strips_doc
 from helpers.validation import ValidationError
 
 

@@ -5,7 +5,7 @@ Date: 2026-02-10
 ## Scope
 
 Audit for missing README files in:
-- helpers/lighting
+- helpers/led_pixels
 - helpers/server
 - helpers/tags
 - helpers/toolkits
@@ -20,7 +20,7 @@ README present:
 - helpers/validation/README.md
 
 README missing:
-- helpers/lighting/README.md
+- helpers/led_pixels/README.md
 - helpers/server/README.md
 - helpers/tags/README.md
 - helpers/toolkits/README.md

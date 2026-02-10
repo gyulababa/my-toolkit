@@ -5,8 +5,8 @@ from dataclasses import dataclass
 
 from helpers.history.applier_tree import TreeApplier
 from helpers.history.history import History
-from helpers.lighting.pixel_buffer_editor import PixelBufferEditor
-from helpers.lighting.pixel_strips_model import PixelColorRGB, seed_pixel_strips_doc
+from my_toolkit.helpers.led_pixels.pixel_buffer_editor import PixelBufferEditor
+from my_toolkit.helpers.led_pixels.pixel_strips_model import PixelColorRGB, seed_pixel_strips_doc
 
 
 @dataclass

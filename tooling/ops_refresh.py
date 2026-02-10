@@ -12,7 +12,7 @@ from typing import Any, Dict, List, Optional
 import pandas as pd
 
 from scripts.CSVcleaner.cleaner_runner import load_recipes_config, run_quickrun_async
-from app.sqlite.dbkit import default_db_config, open_db, SqliteDocStore, DocKey
+from my_toolkit.toolkit_adapters.sqlite.dbkit import default_db_config, open_db, SqliteDocStore, DocKey
 
 
 # -----------------------------

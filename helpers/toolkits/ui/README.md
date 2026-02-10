@@ -14,7 +14,7 @@ Runtime session helpers and command/event structures (runtime)
 
 Does not belong here
 
-Adapter-specific UI toolkit code (app/adapters)
+Adapter-specific UI toolkit code (my_toolkit/toolkit_adapters/adapters)
 
 Service orchestration or persistence layout decisions (services, helpers/persist)
 

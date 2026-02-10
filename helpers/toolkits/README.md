@@ -12,7 +12,7 @@ Shared UI toolkits (spec, state, runtime) that are not adapter-specific
 
 Does not belong here
 
-Adapter-specific UI (app/adapters)
+Adapter-specific UI (my_toolkit/toolkit_adapters/adapters)
 
 Service orchestration and domain binding (services)
 

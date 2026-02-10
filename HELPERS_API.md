@@ -191,9 +191,9 @@ Safe to use inside rendering / driver layers, but avoid in domain logic.
 
 ### Service/App Layering (Mandatory)
 
-Services must not import app modules.
+Services must not import toolkit adapter modules.
 
-GUI adapters must live outside `services/` (use `app/adapters/...`).
+GUI adapters must live outside `services/` (use `my_toolkit/toolkit_adapters/adapters/...`).
 
 Preferred (Public API):
 

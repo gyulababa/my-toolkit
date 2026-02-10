@@ -13,10 +13,13 @@ from helpers.runtime.optional_imports import require
 from examples.preview_vision.config_io import build_preview_wiring
 from services.vision.preview_session import VisionPreviewSession
 
-from app.adapters.dearpygui.vision.stage_surface import StageSurface, StageSurfaceSpec
-from app.adapters.dearpygui.vision.dpg_texture_pool import DpgTexturePool
-from app.adapters.dearpygui.vision.dpg_draw_backend import DpgDrawBackend
-from app.adapters.dearpygui.vision.viewport_compositor import ViewportCompositor
+from my_toolkit.toolkit_adapters.adapters.dearpygui.vision.stage_surface import (
+    StageSurface,
+    StageSurfaceSpec,
+)
+from my_toolkit.toolkit_adapters.adapters.dearpygui.vision.dpg_texture_pool import DpgTexturePool
+from my_toolkit.toolkit_adapters.adapters.dearpygui.vision.dpg_draw_backend import DpgDrawBackend
+from my_toolkit.toolkit_adapters.adapters.dearpygui.vision.viewport_compositor import ViewportCompositor
 
 
 def parse_args() -> argparse.Namespace:

@@ -18,7 +18,7 @@ Device IO or network protocols (see helpers/toolkits)
 
 Persistence and revision handling (helpers/persist)
 
-UI adapters or runtime controls (services/ui, app/adapters)
+UI adapters or runtime controls (services/ui, my_toolkit/toolkit_adapters)
 
 Public API (flat list)
 
