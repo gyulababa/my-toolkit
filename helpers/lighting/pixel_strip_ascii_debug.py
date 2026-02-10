@@ -1,3 +1,4 @@
+# helpers/lighting/pixel_strip_ascii_debug.py
 from __future__ import annotations
 
 from typing import List, Tuple

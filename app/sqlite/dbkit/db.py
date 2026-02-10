@@ -1,3 +1,4 @@
+# app/sqlite/dbkit/db.py
 from __future__ import annotations
 
 import os

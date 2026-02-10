@@ -1,3 +1,4 @@
+# helpers/persist/loader.py
 # helpers/catalogloader/loader.py
 # Convention-based loader for app-scoped JSON templates/configs under helpers/templates/<app>/ and helpers/configs/<app>/.
 

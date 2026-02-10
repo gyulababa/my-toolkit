@@ -1,4 +1,5 @@
-﻿from __future__ import annotations
+# tests/scripts/CSVcleaner/test_clean_csv_sidecar.py
+from __future__ import annotations
 
 import sys
 from pathlib import Path

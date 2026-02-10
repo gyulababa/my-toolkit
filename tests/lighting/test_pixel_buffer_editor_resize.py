@@ -1,3 +1,4 @@
+# tests/lighting/test_pixel_buffer_editor_resize.py
 from __future__ import annotations
 
 from dataclasses import dataclass

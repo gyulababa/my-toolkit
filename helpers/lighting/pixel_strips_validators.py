@@ -1,3 +1,4 @@
+# helpers/lighting/pixel_strips_validators.py
 from __future__ import annotations
 
 from typing import Any, Dict, List

@@ -1,3 +1,4 @@
+# helpers/lighting/__init__.py
 from __future__ import annotations
 
 from .pixel_buffer_editor import PixelBufferEditor

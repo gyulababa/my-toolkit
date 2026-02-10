@@ -1,3 +1,4 @@
+# tests/lighting/test_pixel_strips_validators.py
 from __future__ import annotations
 
 import pytest
