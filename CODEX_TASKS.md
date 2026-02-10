@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0185 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/runtime/spec_resolve.py VERIFY="pytest -q" DESC="Review runtime spec_resolve for correctness, layering, and imports; update parallel README in folder if needed"
 - [ ] ID=T0186 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/runtime/menu_enrich.py VERIFY="pytest -q" DESC="Review runtime menu_enrich for correctness, layering, and imports; update parallel README in folder if needed"
 - [ ] ID=T0187 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/runtime/session.py VERIFY="pytest -q" DESC="Review runtime session for correctness, layering, and imports; update parallel README in folder if needed"
 - [ ] ID=T0188 STATUS=TODO TYPE=refactor SCOPE=app/adapters/dearpygui/panels/log_panel.py VERIFY="pytest -q" DESC="Review log_panel for correctness, layering, and imports; update parallel README in folder if needed"
