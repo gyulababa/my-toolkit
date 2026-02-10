@@ -13,6 +13,8 @@ def migrate_state_dict(d: Dict[str, Any]) -> Dict[str, Any]:
     v1 is baseline.
     """
     v = int(d.get("version", 1))
+    if v not in SUPPORTED_STATE_VERSIONS:
+        raise ValueError(f"Unsupported UiState version: {v}")
     if v == 1:
         # Ensure keys exist with sane defaults.
         d.setdefault("active_layout_id", "default")
@@ -21,5 +23,3 @@ def migrate_state_dict(d: Dict[str, Any]) -> Dict[str, Any]:
         d.setdefault("kv", {})
         d["version"] = 1
         return d
-
-    raise ValueError(f"Unsupported UiState version: {v}")
