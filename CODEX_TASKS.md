@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0174 STATUS=TODO TYPE=doc SCOPE=services/ui/README.md VERIFY="pytest -q" DESC="Create or update README for services.ui explaining UI state service responsibilities and layering boundaries"
 - [ ] ID=T0175 STATUS=TODO TYPE=doc SCOPE=app/adapters/dearpygui/ui/README.md VERIFY="pytest -q" DESC="Create or update README for DearPyGui UI adapter layer covering host bootstrap menus and window manager"
 
 ---
