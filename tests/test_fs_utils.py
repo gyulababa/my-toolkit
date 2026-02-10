@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from helpers.fs_utils import (
+from helpers.fs import (
     ensure_dir,
     ls,
     find_upwards,

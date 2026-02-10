@@ -166,11 +166,9 @@ Canonical FS helpers:
 
     helpers/fs/*
 
-helpers/fs_utils.py:
-- compatibility facade
-- keep for tests
-- do not delete
-- prefer helpers/fs/* in new code
+helpers/fs_utils.py (removed):
+- use helpers/fs/* for filesystem helpers
+- tests should import helpers.fs directly
 
 # Dependency Policy
 

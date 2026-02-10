@@ -26,7 +26,7 @@ They are:
 
 ## Filesystem & IO (Public)
 
-Module: `helpers.fs_utils`
+Module: `helpers.fs`
 
 Use when interacting with the filesystem in any layer.
 
