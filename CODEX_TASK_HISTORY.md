@@ -137,3 +137,4 @@ Codex must:
 - [x] ID=T0195 STATUS=DONE TYPE=refactor SCOPE=preview_vision/*,examples/preview_vision/* VERIFY="pytest -q" DESC="Move preview_vision to examples/preview_vision and update references and entrypoints" COMMIT=21d0f8a DATE=2026-02-10
 - [x] ID=T0196 STATUS=DONE TYPE=refactor SCOPE=helpers/lighting/*,helpers/led_pixels/*,my_toolkit/helpers/* VERIFY="pytest -q" DESC="Rename helpers lighting to my_toolkit.helpers.led_pixels and add compatibility import shim if required" COMMIT=b12e32c DATE=2026-02-10
 - [x] ID=T0197 STATUS=DONE TYPE=refactor SCOPE=. VERIFY="pytest -q" DESC="Update imports tests and docs to new namespaces my_toolkit toolkit_adapters and led_pixels and ensure tests pass" COMMIT=f1ba5bc DATE=2026-02-10
+- [x] ID=T0198 STATUS=DONE TYPE=chore SCOPE=.gitignore VERIFY="pytest -q" DESC="Add ignore rule for my_toolkit.egg-info to keep editable install artifacts out of version control" COMMIT=c92a173 DATE=2026-02-10
