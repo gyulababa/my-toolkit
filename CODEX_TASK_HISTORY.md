@@ -141,3 +141,4 @@ Codex must:
 - [x] ID=T0199 STATUS=DONE TYPE=refactor SCOPE=helpers/toolkits/ui/spec/models.py VERIFY="pytest -q" DESC="Resolve unexpected modification to spec models by reverting or accepting with reviewed imports and README updates" COMMIT=fbc37a6 DATE=2026-02-10
 - [x] ID=T0200 STATUS=DONE TYPE=refactor SCOPE=**/__init__.py VERIFY="pytest -q" DESC="Audit added or modified __init__ modules for correct exports imports and layering compliance" COMMIT=15fe6e4 DATE=2026-02-10
 - [x] ID=T0201 STATUS=DONE TYPE=chore SCOPE=pyproject.toml VERIFY="pytest -q" DESC="Update package discovery include from helpers* to my_toolkit* and keep scripts* to match new install layout" COMMIT=ab22699 DATE=2026-02-10
+- [x] ID=T0202 STATUS=DONE TYPE=refactor SCOPE=app/ VERIFY="pytest -q" DESC="Remove legacy app folder and replace with compatibility shim package for app.* imports pointing to my_toolkit.toolkit_adapters" COMMIT=d2ea732 DATE=2026-02-10
