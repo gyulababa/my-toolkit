@@ -292,7 +292,7 @@ class PixelBufferEditor:
     def render_rgb_bytes(self, strip_id: str) -> bytes:
         """
         Packed RGB bytes with master brightness applied at render time.
-        Safe for DDP-style senders. :contentReference[oaicite:4]{index=4}
+        Safe for DDP-style senders.
         """
         idx = self._find_strip_index(strip_id)
         s = self._strips()[idx]
