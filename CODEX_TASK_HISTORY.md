@@ -109,3 +109,4 @@ Codex must:
 - [x] ID=T0167 STATUS=DONE TYPE=refactor SCOPE=helpers/configs/ui/ui_spec.json VERIFY="pytest -q" DESC="Validate ui_spec.json against UI spec models and update fields to match schema and validation rules" COMMIT=53dbbc5 DATE=2026-02-10
 - [x] ID=T0168 STATUS=DONE TYPE=refactor SCOPE=helpers/toolkits/ui/** VERIFY="pytest -q" DESC="Audit and correct imports across helpers.toolkits.ui packages to use canonical package paths and avoid cross-layer violations" COMMIT=ff7f492 DATE=2026-02-10
 - [x] ID=T0169 STATUS=DONE TYPE=refactor SCOPE=services/ui/** VERIFY="pytest -q" DESC="Audit and correct imports across services.ui modules to ensure no adapter or app layer imports leak inward" COMMIT=bac6b34 DATE=2026-02-10
+- [x] ID=T0170 STATUS=DONE TYPE=refactor SCOPE=app/adapters/dearpygui/ui/** VERIFY="pytest -q" DESC="Audit and correct imports across DearPyGui UI adapter modules to match final package paths and runtime contracts" COMMIT=241fb54 DATE=2026-02-10
