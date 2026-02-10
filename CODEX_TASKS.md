@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0172 STATUS=TODO TYPE=doc SCOPE=helpers/toolkits/ui/state/README.md VERIFY="pytest -q" DESC="Create or update README for helpers.toolkits.ui.state covering state models defaults migration serde and loader"
 - [ ] ID=T0173 STATUS=TODO TYPE=doc SCOPE=helpers/toolkits/ui/runtime/README.md VERIFY="pytest -q" DESC="Create or update README for helpers.toolkits.ui.runtime documenting session commands windows events and autosave"
 - [ ] ID=T0174 STATUS=TODO TYPE=doc SCOPE=services/ui/README.md VERIFY="pytest -q" DESC="Create or update README for services.ui explaining UI state service responsibilities and layering boundaries"
 - [ ] ID=T0175 STATUS=TODO TYPE=doc SCOPE=app/adapters/dearpygui/ui/README.md VERIFY="pytest -q" DESC="Create or update README for DearPyGui UI adapter layer covering host bootstrap menus and window manager"
