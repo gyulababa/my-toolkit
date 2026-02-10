@@ -28,6 +28,8 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
+- [ ] ID=T0158 STATUS=TODO TYPE=chore SCOPE=**/*.py VERIFY="pytest -q" DESC="Scan all python source files and add first-line path comment like '# helpers/bytes_conv.py' where missing without altering logic"
+- [ ] ID=T0159 STATUS=TODO TYPE=refactor SCOPE=app/ VERIFY="pytest -q" DESC="Audit app folder modules for incorrect imports and fix paths to respect layering and package structure"
 
 ---
 
