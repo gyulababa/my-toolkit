@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0203 STATUS=TODO TYPE=refactor SCOPE=helpers/fs_utils.py,helpers/fs/* VERIFY="pytest -q" DESC="Inventory all functions in helpers/fs_utils.py and crossreference with helpers/fs modules to detect gaps and overlaps"
 - [ ] ID=T0204 STATUS=TODO TYPE=refactor SCOPE=helpers/fs/* VERIFY="pytest -q" DESC="Move any missing fs_utils functions into appropriate helpers/fs modules with tests and updated imports"
 - [ ] ID=T0205 STATUS=TODO TYPE=refactor SCOPE=helpers/fs_utils.py VERIFY="pytest -q" DESC="Delete helpers/fs_utils.py after parity confirmed and imports migrated to helpers.fs package"
 
