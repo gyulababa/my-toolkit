@@ -139,3 +139,4 @@ Codex must:
 - [x] ID=T0197 STATUS=DONE TYPE=refactor SCOPE=. VERIFY="pytest -q" DESC="Update imports tests and docs to new namespaces my_toolkit toolkit_adapters and led_pixels and ensure tests pass" COMMIT=f1ba5bc DATE=2026-02-10
 - [x] ID=T0198 STATUS=DONE TYPE=chore SCOPE=.gitignore VERIFY="pytest -q" DESC="Add ignore rule for my_toolkit.egg-info to keep editable install artifacts out of version control" COMMIT=c92a173 DATE=2026-02-10
 - [x] ID=T0199 STATUS=DONE TYPE=refactor SCOPE=helpers/toolkits/ui/spec/models.py VERIFY="pytest -q" DESC="Resolve unexpected modification to spec models by reverting or accepting with reviewed imports and README updates" COMMIT=fbc37a6 DATE=2026-02-10
+- [x] ID=T0200 STATUS=DONE TYPE=refactor SCOPE=**/__init__.py VERIFY="pytest -q" DESC="Audit added or modified __init__ modules for correct exports imports and layering compliance" COMMIT=15fe6e4 DATE=2026-02-10

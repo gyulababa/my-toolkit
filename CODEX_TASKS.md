@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0200 STATUS=TODO TYPE=refactor SCOPE=**/__init__.py VERIFY="pytest -q" DESC="Audit added or modified __init__ modules for correct exports imports and layering compliance"
 
 
 ---
