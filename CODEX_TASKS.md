@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0183 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/spec/serde.py VERIFY="pytest -q" DESC="Review spec serde for correctness, layering, and imports; update parallel README in folder if needed"
 - [ ] ID=T0184 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/spec/validate.py VERIFY="pytest -q" DESC="Review spec validate for correctness, layering, and imports; update parallel README in folder if needed"
 - [ ] ID=T0185 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/runtime/spec_resolve.py VERIFY="pytest -q" DESC="Review runtime spec_resolve for correctness, layering, and imports; update parallel README in folder if needed"
 - [ ] ID=T0186 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/runtime/menu_enrich.py VERIFY="pytest -q" DESC="Review runtime menu_enrich for correctness, layering, and imports; update parallel README in folder if needed"
