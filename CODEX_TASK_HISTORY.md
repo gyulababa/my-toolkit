@@ -92,3 +92,4 @@ Codex must:
 - [x] =T0150 STATUS=DONE TYPE=refactor SCOPE=helpers/strip_map.py VERIFY="pytest -q" DESC="Refactor strip_map naming and docs to emphasize discrete axis utility and prepare compatibility aliasing for future renames" COMMIT=d25e407 DATE=2026-02-10
 - [x] =T0151 STATUS=DONE TYPE=refactor SCOPE=helpers/strip_preview_ascii.py VERIFY="pytest -q" DESC="Refactor strip_preview_ascii docstrings to clarify non LED usage while keeping backward compatible signatures" COMMIT=5d82c30 DATE=2026-02-10
 - [x] =T0152 STATUS=DONE TYPE=doc SCOPE=CODEX_PIXEL_STRIPS.md VERIFY="pytest -q" DESC="Document pixel strips schema- [ ]  and naming conventions endpoint semantics and PixelBufferEditor API contracts" COMMIT=ce80add DATE=2026-02-10
+- [x] =T0153 STATUS=DONE TYPE=feat SCOPE=helpers/lighting/init.py VERIFY="pytest -q" DESC="Expose lighting public API exports for PixelBufferEditor and pixel strip model types with stable import paths" COMMIT=4bb1b09 DATE=2026-02-10
