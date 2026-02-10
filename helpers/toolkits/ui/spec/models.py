@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import List, Literal, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 
 
 CommandKind = Literal["app", "builtin", "runtime"]
@@ -13,9 +13,7 @@ class CommandSpec:
     id: str
     title: str
     kind: CommandKind = "app"
-    # Optional payload schema name / hint (kept loose for v1)
     payload_schema: Optional[str] = None
-    # Optional enable predicate key (resolved by runtime/registry)
     enabled_when: Optional[str] = None
 
 
@@ -62,9 +60,7 @@ DockArea = Literal["left", "right", "top", "bottom", "center"]
 @dataclass(frozen=True)
 class DockHint:
     area: DockArea = "center"
-    # Ratio of dock area (adapter may interpret). Optional.
     ratio: Optional[float] = None
-    # Optional dock relative to another window (adapter may interpret)
     target_window_id: Optional[str] = None
 
 
@@ -75,8 +71,11 @@ class WindowSpec:
     factory: str
     drawn_on_start: bool = True
     dock_hint: Optional[DockHint] = None
-    # Optional menu path hint (adapter may use). Example: ["View"]
     menu_path: Optional[List[str]] = None
+
+    # NEW: data-driven panel config
+    factory_args: Optional[Dict[str, Any]] = None
+    factory_args_ref: Optional[str] = None
 
 
 @dataclass(frozen=True)
