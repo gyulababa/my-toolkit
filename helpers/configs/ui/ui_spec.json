@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "commands": [
+    { "id": "app.quit", "title": "Quit", "kind": "builtin" },
+    { "id": "file.open_config", "title": "Open config...", "kind": "app" }
+  ],
+  "menus": [
+    {
+      "id": "main",
+      "title": "Main",
+      "items": [
+        { "type": "submenu", "title": "File", "items": [
+          { "type": "command", "command_id": "file.open_config" },
+          { "type": "separator" },
+          { "type": "command", "command_id": "app.quit" }
+        ]},
+        { "type": "submenu", "title": "View", "items": [
+          { "type": "window_toggle", "window_id": "win.viewport" },
+          { "type": "window_toggle", "window_id": "win.log" }
+        ]}
+      ]
+    }
+  ],
+  "windows": [
+    {
+      "id": "win.viewport",
+      "title": "Viewport",
+      "factory": "vision.viewport",
+      "drawn_on_start": true,
+      "dock_hint": { "area": "center" }
+    },
+    {
+      "id": "win.log",
+      "title": "Log",
+      "factory": "common.log_panel",
+      "drawn_on_start": true,
+      "dock_hint": { "area": "bottom", "ratio": 0.25 }
+    }
+  ]
+}
