@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0192 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/runtime/autosave.py VERIFY="pytest -q" DESC="Review runtime autosave for correctness, layering, and imports; update parallel README in folder if needed"
 - [ ] ID=T0193 STATUS=TODO TYPE=refactor SCOPE=pyproject.toml,my_toolkit/*,helpers/*,services/* VERIFY="pytest -q" DESC="Create my_toolkit/ import root and add compatibility shims for helpers/ and services/; update pyproject package discovery to include my_toolkit* and services*"
 - [ ] ID=T0194 STATUS=TODO TYPE=refactor SCOPE=app/*,toolkit_adapters/*,my_toolkit/* VERIFY="pytest -q" DESC="Move/rename toolkit app/ package to my_toolkit/toolkit_adapters/ (avoid top-level app namespace); add minimal compat shim if needed"
 - [ ] ID=T0195 STATUS=TODO TYPE=refactor SCOPE=preview_vision/*,examples/preview_vision/* VERIFY="pytest -q" DESC="Move preview_vision/ to repo examples/preview_vision/ (not packaged) and update any references/entrypoints accordingly"
