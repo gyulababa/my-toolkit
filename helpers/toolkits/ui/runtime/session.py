@@ -4,12 +4,13 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Dict, Optional
 
-from helpers.toolkits.ui.spec import UiSpec
-from helpers.toolkits.ui.state import UiState
+from helpers.toolkits.ui.spec.models import UiSpec
+from helpers.toolkits.ui.state.models import UiState
 from .commands import CommandRegistry
 from .ctx import UiCtx
 from .events import UiEventBus
 from .windows import UiHost, WindowFactoryRegistry, WindowHandle
+from .menu_enrich import enrich_menus
 
 
 @dataclass
@@ -19,7 +20,7 @@ class UiSession:
     commands: CommandRegistry
     factories: WindowFactoryRegistry
 
-    _handles: Dict[str, WindowHandle] = None  # type: ignore[assignment]
+    _handles: Optional[Dict[str, WindowHandle]] = None
 
     def build(self, host: UiHost, services: object | None = None) -> UiCtx:
         self._handles = {}
@@ -31,8 +32,10 @@ class UiSession:
 
         def on_window_toggle(window_id: str) -> None:
             self.toggle_window(window_id)
+            ctx.events.emit("state_dirty", reason="window_toggle", window_id=window_id)
 
-        host.build_menus(self.spec.menus, on_command=on_command, on_window_toggle=on_window_toggle)
+        effective_menus = enrich_menus(self.spec)
+        host.build_menus(effective_menus, on_command=on_command, on_window_toggle=on_window_toggle)
 
         for w in self.spec.windows:
             if not self.factories.has(w.factory):
