@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Literal, Optional, Sequence, Tuple, Union
+from typing import List, Literal, Optional, Union
 
 
 CommandKind = Literal["app", "builtin", "runtime"]
