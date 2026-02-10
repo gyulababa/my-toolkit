@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import List, Tuple
 
-from helpers.strip_map import FixedStrip  # keep existing utility :contentReference[oaicite:6]{index=6}
-from helpers.strip_preview_ascii import preview_ranges_with_labels  # :contentReference[oaicite:7]{index=7}
+from helpers.strip_map import FixedStrip
+from helpers.strip_preview_ascii import preview_ranges_with_labels
 
 from .pixel_buffer_editor import PixelBufferEditor
 
@@ -11,7 +11,7 @@ from .pixel_buffer_editor import PixelBufferEditor
 def preview_whole_strip_ascii(editor: PixelBufferEditor, strip_id: str) -> str:
     """
     Debug: render one character per pixel showing whether it's black or not.
-    Not a color preview — just a quick "activity" map.
+    Not a color preview -- just a quick "activity" map.
     """
     doc = editor.editable.raw
     idx = editor._find_strip_index(strip_id)  # internal helper, OK for debug
@@ -34,3 +34,4 @@ def preview_whole_strip_ascii(editor: PixelBufferEditor, strip_id: str) -> str:
 
     names = [f"on_{k}" for k in range(len(ranges))]
     return preview_ranges_with_labels(strip, ranges, names)
+
