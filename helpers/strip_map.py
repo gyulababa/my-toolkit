@@ -9,14 +9,14 @@ from .math.basic import clamp, clamp01
 from .time_utils import TimedSession, progress_ratio
 
 
-# ─────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 # Core strip abstractions
-# ─────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
 
 @dataclass(frozen=True)
 class FixedStrip:
     """
-    Abstract fixed-length strip (e.g. LED strip, timeline slots).
+    Fixed-length discrete axis (e.g. LED strip, timeline slots, frame indices).
 
     Notes:
     - `length` is a count of discrete positions.
@@ -35,13 +35,17 @@ class FixedStrip:
         return int(clamp(int(i), 0, self.length - 1))
 
 
-# ─────────────────────────────────────────────────────────────
-# Progress → index mapping
-# ─────────────────────────────────────────────────────────────
+# Compatibility alias for future renames.
+DiscreteAxis = FixedStrip
+
+
+# -----------------------------------------------------------------------------
+# Progress -> index mapping
+# -----------------------------------------------------------------------------
 
 def progress_to_index(progress: float, strip: FixedStrip) -> int:
     """
-    Map progress ∈ [0.0, 1.0] to an index ∈ [0, length-1].
+    Map progress in [0.0, 1.0] to an index on a discrete axis [0, length-1].
 
     Deterministic, no overflow:
       - progress==0.0 -> 0
@@ -76,9 +80,9 @@ def session_playhead_index(
     return progress_to_index(p, strip)
 
 
-# ─────────────────────────────────────────────────────────────
-# Segment → contiguous ranges mapping
-# ─────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
+# Segment -> contiguous ranges mapping
+# -----------------------------------------------------------------------------
 
 @dataclass(frozen=True)
 class TimeSegment:
@@ -97,7 +101,7 @@ def segments_to_ranges(
     total_duration: timedelta,
 ) -> List[Tuple[int, int]]:
     """
-    Map segments to contiguous index ranges [start, end).
+    Map segments to contiguous discrete-axis index ranges [start, end).
 
     Guarantees:
       - last end == strip.length
@@ -151,9 +155,9 @@ def segments_to_ranges(
     return fixed
 
 
-# ─────────────────────────────────────────────────────────────
-# Session → active segment helpers
-# ─────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------------------
+# Session -> active segment helpers
+# -----------------------------------------------------------------------------
 
 def active_segment_index(
     session: TimedSession,
