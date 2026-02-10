@@ -18,3 +18,4 @@ atomic_write_json | helpers/fs/json.py | Same behavior.
 
 Gaps: none detected (helpers/fs covers all helpers/fs_utils functions).
 Overlaps: all helpers/fs_utils functions overlap with helpers/fs equivalents.
+T0204 result: no missing helpers/fs_utils functions to move; no import updates required.
