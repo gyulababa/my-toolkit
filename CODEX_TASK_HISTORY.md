@@ -95,3 +95,4 @@ Codex must:
 - [x] =T0153 STATUS=DONE TYPE=feat SCOPE=helpers/lighting/init.py VERIFY="pytest -q" DESC="Expose lighting public API exports for PixelBufferEditor and pixel strip model types with stable import paths" COMMIT=4bb1b09 DATE=2026-02-10
 - [x] =T0154 STATUS=DONE TYPE=chore SCOPE=tests/lighting VERIFY="pytest -q" DESC="Add lighting test package scaffolding and ensure pytest discovery configuration" COMMIT=6ba570f DATE=2026-02-10
 - [x] =T0155 STATUS=DONE TYPE=feat SCOPE=helpers/lighting/pixel_strips_validators.py VERIFY="pytest -q" DESC="Add validators for pixel strip raw docs covering schema version- [ ] s uniqueness pixel count match and endpoint fields" COMMIT=1b2cc93 DATE=2026-02-10
+- [x] =T0156 STATUS=DONE TYPE=test SCOPE=tests/lighting/test_pixel_strips_validators.py VERIFY="pytest -q" DESC="Add tests for pixel strip validators including invalid RGB triplets brightness bounds endpoint parsing and duplicate- [ ] s" COMMIT=8b4bc82 DATE=2026-02-10
