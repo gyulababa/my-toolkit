@@ -27,7 +27,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 ---
 
 ## Task Registry
-- [ ] ID=T0201 STATUS=TODO TYPE=chore SCOPE=pyproject.toml VERIFY="pytest -q" DESC="Update package discovery include from helpers* to my_toolkit* and keep scripts* to match new install layout"
 
 
 ---
