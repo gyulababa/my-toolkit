@@ -28,8 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] =T0155 STATUS=TODO TYPE=feat SCOPE=helpers/lighting/pixel_strips_validators.py VERIFY="pytest -q" DESC="Add validators for pixel strip raw docs covering schema version- [ ] s uniqueness pixel count match and endpoint fields"
-
 - [ ] =T0156 STATUS=TODO TYPE=test SCOPE=tests/lighting/test_pixel_strips_validators.py VERIFY="pytest -q" DESC="Add tests for pixel strip validators including invalid RGB triplets brightness bounds endpoint parsing and duplicate- [ ] s"
 ---
 
