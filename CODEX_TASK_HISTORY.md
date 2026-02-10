@@ -143,3 +143,4 @@ Codex must:
 - [x] ID=T0201 STATUS=DONE TYPE=chore SCOPE=pyproject.toml VERIFY="pytest -q" DESC="Update package discovery include from helpers* to my_toolkit* and keep scripts* to match new install layout" COMMIT=ab22699 DATE=2026-02-10
 - [x] ID=T0202 STATUS=DONE TYPE=refactor SCOPE=app/ VERIFY="pytest -q" DESC="Remove legacy app folder and replace with compatibility shim package for app.* imports pointing to my_toolkit.toolkit_adapters" COMMIT=d2ea732 DATE=2026-02-10
 - [x] ID=T0203 STATUS=DONE TYPE=refactor SCOPE=helpers/fs_utils.py,helpers/fs/* VERIFY="pytest -q" DESC="Inventory all functions in helpers/fs_utils.py and crossreference with helpers/fs modules to detect gaps and overlaps" COMMIT=faa96af DATE=2026-02-10
+- [x] ID=T0204 STATUS=DONE TYPE=refactor SCOPE=helpers/fs/* VERIFY="pytest -q" DESC="Move any missing fs_utils functions into appropriate helpers/fs modules with tests and updated imports" COMMIT=23f844e DATE=2026-02-10
