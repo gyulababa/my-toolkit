@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0164 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/runtime/ VERIFY="pytest -q" DESC="Review helpers.toolkits.ui.runtime package and ensure runtime layer is frontend-agnostic and depends only on helpers and toolkits"
 - [ ] ID=T0165 STATUS=TODO TYPE=refactor SCOPE=services/ui/ VERIFY="pytest -q" DESC="Review services.ui layer and confirm it binds UI state to persisted domain and history without importing app adapters"
 - [ ] ID=T0166 STATUS=TODO TYPE=refactor SCOPE=app/adapters/dearpygui/ui/ VERIFY="pytest -q" DESC="Review DearPyGui UI adapter modules and ensure they depend only on services.ui and helpers.toolkits.ui layers"
 - [ ] ID=T0167 STATUS=TODO TYPE=refactor SCOPE=helpers/configs/ui/ui_spec.json VERIFY="pytest -q" DESC="Validate ui_spec.json against UI spec models and update fields to match schema and validation rules"
