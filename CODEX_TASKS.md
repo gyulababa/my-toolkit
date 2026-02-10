@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0167 STATUS=TODO TYPE=refactor SCOPE=helpers/configs/ui/ui_spec.json VERIFY="pytest -q" DESC="Validate ui_spec.json against UI spec models and update fields to match schema and validation rules"
 - [ ] ID=T0168 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/** VERIFY="pytest -q" DESC="Audit and correct imports across helpers.toolkits.ui packages to use canonical package paths and avoid cross-layer violations"
 - [ ] ID=T0169 STATUS=TODO TYPE=refactor SCOPE=services/ui/** VERIFY="pytest -q" DESC="Audit and correct imports across services.ui modules to ensure no adapter or app layer imports leak inward"
 - [ ] ID=T0170 STATUS=TODO TYPE=refactor SCOPE=app/adapters/dearpygui/ui/** VERIFY="pytest -q" DESC="Audit and correct imports across DearPyGui UI adapter modules to match final package paths and runtime contracts"
