@@ -10,6 +10,7 @@ __pycache__/
 *.bak
 *.swp
 *.zip
+my_toolkit.egg-info/
 scripts/CSVcleaner/README.md
 scripts/CSVcleaner/index_settings.json
 scripts/CSVcleaner/index_sources.json
