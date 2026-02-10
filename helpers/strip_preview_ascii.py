@@ -14,7 +14,7 @@ def preview_ranges_ascii(
     empty: str = ".",
 ) -> str:
     """
-    Render ranges into a single ASCII line of length strip.length.
+    Render ranges into a single ASCII line of length strip.length for any discrete axis.
 
     Each range is visualized using a distinct character from `charset`
     by index. If there are more ranges than available characters, the
@@ -73,7 +73,7 @@ def preview_playhead_ascii(
 
     Use cases:
       - overlay a current-time playhead on top of segment ranges
-      - show a moving cursor index for LED strip demos
+      - show a moving cursor index for discrete-axis demos
 
     Requirements:
       - base_line length must equal strip.length
@@ -126,7 +126,7 @@ def preview_ranges_with_labels(
 
 def preview_three_bands_ascii(length: int) -> str:
     """
-    Convenience preview for a 3-band partition across a fixed-length strip.
+    Convenience preview for a 3-band partition across a fixed-length axis.
 
     Purely spatial (does not represent colors).
     """
