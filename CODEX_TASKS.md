@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0161 STATUS=TODO TYPE=doc SCOPE=helpers/**/README.md VERIFY="pytest -q" DESC="Create README files for helpers lighting, server, tags, toolkits and its subfolders, transforms, validation, vision, and zones"
 - [ ] ID=T0162 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/spec/ VERIFY="pytest -q" DESC="Review helpers.toolkits.ui.spec package and align module structure, exports, and naming with toolkit layering rules"
 - [ ] ID=T0163 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/state/ VERIFY="pytest -q" DESC="Review helpers.toolkits.ui.state package and ensure models serde migrate and loader integrate cleanly with persisted loader patterns"
 - [ ] ID=T0164 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/runtime/ VERIFY="pytest -q" DESC="Review helpers.toolkits.ui.runtime package and ensure runtime layer is frontend-agnostic and depends only on helpers and toolkits"

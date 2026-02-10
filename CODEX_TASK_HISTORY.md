@@ -100,3 +100,4 @@ Codex must:
 - [x] ID=T0158 STATUS=DONE TYPE=chore SCOPE=**/*.py VERIFY="pytest -q" DESC="Scan all python source files and add first-line path comment like '# helpers/bytes_conv.py' where missing without altering logic" COMMIT=1a3c8d3 DATE=2026-02-10
 - [x] ID=T0159 STATUS=DONE TYPE=refactor SCOPE=app/ VERIFY="pytest -q" DESC="Audit app folder modules for incorrect imports and fix paths to respect layering and package structure" COMMIT=c923af4 DATE=2026-02-10
 - [x] ID=T0160 STATUS=DONE TYPE=doc SCOPE=helpers/ VERIFY="pytest -q" DESC="Audit helpers subfolders lighting, server, tags, toolkits, transforms, validation, vision, and zones for missing README files" COMMIT=8ed2ab5 DATE=2026-02-10
+- [x] ID=T0161 STATUS=DONE TYPE=doc SCOPE=helpers/**/README.md VERIFY="pytest -q" DESC="Create README files for helpers lighting, server, tags, toolkits and its subfolders, transforms, validation, vision, and zones" COMMIT=24bdd3b DATE=2026-02-10
