@@ -28,8 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] =T0146 STATUS=TODO TYPE=feat SCOPE=helpers/lighting/pixel_strip_ascii_debug.py VERIFY="pytest -q" DESC="Add ASCII debug preview helpers that reuse FixedStrip and strip_preview_ascii for quick headless visualization"
-
 - [ ] =T0147 STATUS=TODO TYPE=test SCOPE=tests/lighting/test_pixel_buffer_editor_basic.py VERIFY="pytest -q" DESC="Add tests for create/delete strip, set_pixel, fill, set_range, and render_rgb_bytes brightness application"
 
 - [ ] =T0148 STATUS=TODO TYPE=test SCOPE=tests/lighting/test_pixel_buffer_editor_resize.py VERIFY="pytest -q" DESC="Add tests for resize_pixels increase/decrease preserving prefix and enforcing pixel_count and pixels length invariants"
