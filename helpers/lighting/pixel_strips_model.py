@@ -111,18 +111,20 @@ def seed_strip_raw(
 ) -> Dict[str, Any]:
     if not strip_id:
         raise ValueError("strip_id must be non-empty")
+    pixel_count = int(pixel_count)
     if pixel_count < 0:
         raise ValueError("pixel_count must be >= 0")
 
     fill = fill or PixelColorRGB.black()
     pixels = [fill.to_triplet() for _ in range(pixel_count)]
+    mb = normalize_master_brightness(master_brightness)
 
     raw: Dict[str, Any] = {
         "id": strip_id,
         "type": strip_type.value,
         "pixel_count": int(pixel_count),
         "pixels": pixels,
-        "master_brightness": float(master_brightness),
+        "master_brightness": mb,
         "names": {
             "display": display_name or "",
             "aliases": aliases or [],
