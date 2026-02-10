@@ -28,8 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] =T0148 STATUS=TODO TYPE=test SCOPE=tests/lighting/test_pixel_buffer_editor_resize.py VERIFY="pytest -q" DESC="Add tests for resize_pixels increase/decrease preserving prefix and enforcing pixel_count and pixels length invariants"
-
 - [ ] =T0149 STATUS=TODO TYPE=test SCOPE=tests/lighting/test_pixel_buffer_editor_history.py VERIFY="pytest -q" DESC="Add tests verifying PixelBufferEditor uses History ops when history.doc is bound and supports undo redo of edits"
 
 - [ ] =T0150 STATUS=TODO TYPE=refactor SCOPE=helpers/strip_map.py VERIFY="pytest -q" DESC="Refactor strip_map naming and docs to emphasize discrete axis utility and prepare compatibility aliasing for future renames"
