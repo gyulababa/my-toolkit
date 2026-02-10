@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0187 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/runtime/session.py VERIFY="pytest -q" DESC="Review runtime session for correctness, layering, and imports; update parallel README in folder if needed"
 - [ ] ID=T0188 STATUS=TODO TYPE=refactor SCOPE=app/adapters/dearpygui/panels/log_panel.py VERIFY="pytest -q" DESC="Review log_panel for correctness, layering, and imports; update parallel README in folder if needed"
 - [ ] ID=T0189 STATUS=TODO TYPE=refactor SCOPE=app/adapters/dearpygui/panels/about_panel.py VERIFY="pytest -q" DESC="Review about_panel for correctness, layering, and imports; update parallel README in folder if needed"
 - [ ] ID=T0190 STATUS=TODO TYPE=refactor SCOPE=app/adapters/dearpygui/panels/register_default_panels.py VERIFY="pytest -q" DESC="Review register_default_panels for correctness, layering, and imports; update parallel README in folder if needed"
