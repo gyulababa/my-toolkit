@@ -28,8 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] =T0006 STATUS=TODO TYPE=chore SCOPE=CODEX_TASKS.md VERIFY="pytest -q" DESC="Review unexpected CODEX_TASKS.md modifications (show diff, classify as valid registry-only edit vs scope leak); revert if invalid, or normalize to registry rules without reflow"
-
 - [ ] =T0007 STATUS=TODO TYPE=chore SCOPE=app/sqlite/ VERIFY="pytest -q" DESC="Review untracked app/sqlite/ contents: summarize purpose, decide keep vs delete vs ignore; if keep, add minimal docs/README and ensure no large/derived artifacts are committed"
 
 - [ ] =T0008 STATUS=TODO TYPE=chore SCOPE=helpers/lighting/,ops_refresh.py VERIFY="pytest -q" DESC="Review untracked helpers/lighting/ and ops_refresh.py: summarize intent, determine correct layer/ownership, and either integrate (add init/typing/tests if needed) or remove/ignore; commit only if within intended architecture"
