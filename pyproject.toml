@@ -1,3 +1,18 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "my-toolkit"
+version = "0.1.0"
+description = "Reusable toolkit utilities for Apunak Radio"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["helpers*", "scripts*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
