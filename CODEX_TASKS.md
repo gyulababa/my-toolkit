@@ -28,6 +28,21 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
+- [ ] ID=T0183 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/spec/serde.py VERIFY="pytest -q" DESC="Review spec serde for correctness, layering, and imports; update parallel README in folder if needed"
+- [ ] ID=T0184 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/spec/validate.py VERIFY="pytest -q" DESC="Review spec validate for correctness, layering, and imports; update parallel README in folder if needed"
+- [ ] ID=T0185 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/runtime/spec_resolve.py VERIFY="pytest -q" DESC="Review runtime spec_resolve for correctness, layering, and imports; update parallel README in folder if needed"
+- [ ] ID=T0186 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/runtime/menu_enrich.py VERIFY="pytest -q" DESC="Review runtime menu_enrich for correctness, layering, and imports; update parallel README in folder if needed"
+- [ ] ID=T0187 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/runtime/session.py VERIFY="pytest -q" DESC="Review runtime session for correctness, layering, and imports; update parallel README in folder if needed"
+- [ ] ID=T0188 STATUS=TODO TYPE=refactor SCOPE=app/adapters/dearpygui/panels/log_panel.py VERIFY="pytest -q" DESC="Review log_panel for correctness, layering, and imports; update parallel README in folder if needed"
+- [ ] ID=T0189 STATUS=TODO TYPE=refactor SCOPE=app/adapters/dearpygui/panels/about_panel.py VERIFY="pytest -q" DESC="Review about_panel for correctness, layering, and imports; update parallel README in folder if needed"
+- [ ] ID=T0190 STATUS=TODO TYPE=refactor SCOPE=app/adapters/dearpygui/panels/register_default_panels.py VERIFY="pytest -q" DESC="Review register_default_panels for correctness, layering, and imports; update parallel README in folder if needed"
+- [ ] ID=T0191 STATUS=TODO TYPE=refactor SCOPE=app/adapters/dearpygui/ui/bootstrap.py VERIFY="pytest -q" DESC="Review DearPyGui UI bootstrap for correctness, layering, and imports; update parallel README in folder if needed"
+- [ ] ID=T0192 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/runtime/autosave.py VERIFY="pytest -q" DESC="Review runtime autosave for correctness, layering, and imports; update parallel README in folder if needed"
+- [ ] ID=T0193 STATUS=TODO TYPE=refactor SCOPE=pyproject.toml,my_toolkit/*,helpers/*,services/* VERIFY="pytest -q" DESC="Create my_toolkit/ import root and add compatibility shims for helpers/ and services/; update pyproject package discovery to include my_toolkit* and services*"
+- [ ] ID=T0194 STATUS=TODO TYPE=refactor SCOPE=app/*,toolkit_adapters/*,my_toolkit/* VERIFY="pytest -q" DESC="Move/rename toolkit app/ package to my_toolkit/toolkit_adapters/ (avoid top-level app namespace); add minimal compat shim if needed"
+- [ ] ID=T0195 STATUS=TODO TYPE=refactor SCOPE=preview_vision/*,examples/preview_vision/* VERIFY="pytest -q" DESC="Move preview_vision/ to repo examples/preview_vision/ (not packaged) and update any references/entrypoints accordingly"
+- [ ] ID=T0196 STATUS=TODO TYPE=refactor SCOPE=helpers/lighting/*,helpers/led_pixels/*,my_toolkit/helpers/* VERIFY="pytest -q" DESC="Rename helpers/lighting to my_toolkit/helpers/led_pixels (LED pixel strips, not monitor pixels); add compat import shim if required"
+- [ ] ID=T0197 STATUS=TODO TYPE=refactor SCOPE=. VERIFY="pytest -q" DESC="Update imports, tests, and docs to new namespaces (my_toolkit.*, toolkit_adapters.*, led_pixels); ensure pytest -q passes and docs reflect new layout"
 
 ---
 
