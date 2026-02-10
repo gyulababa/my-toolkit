@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0169 STATUS=TODO TYPE=refactor SCOPE=services/ui/** VERIFY="pytest -q" DESC="Audit and correct imports across services.ui modules to ensure no adapter or app layer imports leak inward"
 - [ ] ID=T0170 STATUS=TODO TYPE=refactor SCOPE=app/adapters/dearpygui/ui/** VERIFY="pytest -q" DESC="Audit and correct imports across DearPyGui UI adapter modules to match final package paths and runtime contracts"
 - [ ] ID=T0171 STATUS=TODO TYPE=doc SCOPE=helpers/toolkits/ui/spec/README.md VERIFY="pytest -q" DESC="Create or update README for helpers.toolkits.ui.spec describing spec models serde validate and file-driven menu design"
 - [ ] ID=T0172 STATUS=TODO TYPE=doc SCOPE=helpers/toolkits/ui/state/README.md VERIFY="pytest -q" DESC="Create or update README for helpers.toolkits.ui.state covering state models defaults migration serde and loader"
