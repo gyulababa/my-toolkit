@@ -1,24 +1,13 @@
 # app/adapters/csvcleaner/recipes.py
 from __future__ import annotations
 
-import sys
 from pathlib import Path
 from typing import Any
 
 from helpers.catalog import Catalog
 
-
-def _ensure_scripts_on_path() -> None:
-    root = Path(__file__).resolve().parents[3]
-    scripts_dir = root / "scripts"
-    if str(scripts_dir) not in sys.path:
-        sys.path.insert(0, str(scripts_dir))
-
-
-_ensure_scripts_on_path()
-
-from CSVcleaner.recipes_catalog_loader import RECIPES_LOADER  # noqa: E402
-from CSVcleaner.recipes_schema import (  # noqa: E402
+from scripts.CSVcleaner.recipes_catalog_loader import RECIPES_LOADER
+from scripts.CSVcleaner.recipes_schema import (
     CleaningRecipesResolved,
     RecipeResolved,
 )

@@ -1,23 +1,12 @@
 # app/adapters/csvcleaner/run_reports.py
 from __future__ import annotations
 
-import sys
 from pathlib import Path
 from typing import Any, Dict, List
 
 from helpers.catalog import EditableCatalog
 
-
-def _ensure_scripts_on_path() -> None:
-    root = Path(__file__).resolve().parents[3]
-    scripts_dir = root / "scripts"
-    if str(scripts_dir) not in sys.path:
-        sys.path.insert(0, str(scripts_dir))
-
-
-_ensure_scripts_on_path()
-
-from CSVcleaner.run_report import CleaningRunReport, RUN_REPORT_PERSIST  # noqa: E402
+from scripts.CSVcleaner.run_report import CleaningRunReport, RUN_REPORT_PERSIST
 
 
 def persist_quickrun_report(
