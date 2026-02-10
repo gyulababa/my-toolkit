@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0177 STATUS=TODO TYPE=doc SCOPE=app/adapters/dearpygui/ui/README.md VERIFY="pytest -q" DESC="Update README for app/adapters/dearpygui/ui to reflect current module roles, imports, and bootstrap/menu/window architecture"
 - [ ] ID=T0178 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/runtime/commands.py VERIFY="pytest -q" DESC="Review accidental addition in runtime commands module; accept or adjust imports/contract usage and document impacts if needed"
 - [ ] ID=T0179 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/runtime/events.py VERIFY="pytest -q" DESC="Review accidental addition in runtime events module; accept or adjust imports/contract usage and document impacts if needed"
 - [ ] ID=T0180 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/spec/models.py VERIFY="pytest -q" DESC="Review accidental addition in ui spec models; accept or adjust imports/contract usage and document impacts if needed"
