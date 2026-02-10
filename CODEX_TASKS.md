@@ -28,9 +28,37 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
+- [ ] =T0006 STATUS=TODO TYPE=chore SCOPE=CODEX_TASKS.md VERIFY="pytest -q" DESC="Review unexpected CODEX_TASKS.md modifications (show diff, classify as valid registry-only edit vs scope leak); revert if invalid, or normalize to registry rules without reflow"
 
+- [ ] =T0007 STATUS=TODO TYPE=chore SCOPE=app/sqlite/ VERIFY="pytest -q" DESC="Review untracked app/sqlite/ contents: summarize purpose, decide keep vs delete vs ignore; if keep, add minimal docs/README and ensure no large/derived artifacts are committed"
 
+- [ ] =T0008 STATUS=TODO TYPE=chore SCOPE=helpers/lighting/,ops_refresh.py VERIFY="pytest -q" DESC="Review untracked helpers/lighting/ and ops_refresh.py: summarize intent, determine correct layer/ownership, and either integrate (add init/typing/tests if needed) or remove/ignore; commit only if within intended architecture"
 
+- [ ] =T0144 STATUS=TODO TYPE=feat SCOPE=helpers/lighting/pixel_strips_model.py VERIFY="pytest -q" DESC="Add pixel strip core model (PixelColorRGB, StripType, Endpoint) and raw seed helpers for persisted docs"
+
+- [ ] =T0145 STATUS=TODO TYPE=feat SCOPE=helpers/lighting/pixel_buffer_editor.py VERIFY="pytest -q" DESC="Implement PixelBufferEditor with create/delete/metadata/pixel edit ops using optional History push_* integration"
+
+- [ ] =T0146 STATUS=TODO TYPE=feat SCOPE=helpers/lighting/pixel_strip_ascii_debug.py VERIFY="pytest -q" DESC="Add ASCII debug preview helpers that reuse FixedStrip and strip_preview_ascii for quick headless visualization"
+
+- [ ] =T0147 STATUS=TODO TYPE=test SCOPE=tests/lighting/test_pixel_buffer_editor_basic.py VERIFY="pytest -q" DESC="Add tests for create/delete strip, set_pixel, fill, set_range, and render_rgb_bytes brightness application"
+
+- [ ] =T0148 STATUS=TODO TYPE=test SCOPE=tests/lighting/test_pixel_buffer_editor_resize.py VERIFY="pytest -q" DESC="Add tests for resize_pixels increase/decrease preserving prefix and enforcing pixel_count and pixels length invariants"
+
+- [ ] =T0149 STATUS=TODO TYPE=test SCOPE=tests/lighting/test_pixel_buffer_editor_history.py VERIFY="pytest -q" DESC="Add tests verifying PixelBufferEditor uses History ops when history.doc is bound and supports undo redo of edits"
+
+- [ ] =T0150 STATUS=TODO TYPE=refactor SCOPE=helpers/strip_map.py VERIFY="pytest -q" DESC="Refactor strip_map naming and docs to emphasize discrete axis utility and prepare compatibility aliasing for future renames"
+
+- [ ] =T0151 STATUS=TODO TYPE=refactor SCOPE=helpers/strip_preview_ascii.py VERIFY="pytest -q" DESC="Refactor strip_preview_ascii docstrings to clarify non LED usage while keeping backward compatible signatures"
+
+- [ ] =T0152 STATUS=TODO TYPE=doc SCOPE=CODEX_PIXEL_STRIPS.md VERIFY="pytest -q" DESC="Document pixel strips schema- [ ]  and naming conventions endpoint semantics and PixelBufferEditor API contracts"
+
+- [ ] =T0153 STATUS=TODO TYPE=feat SCOPE=helpers/lighting/init.py VERIFY="pytest -q" DESC="Expose lighting public API exports for PixelBufferEditor and pixel strip model types with stable import paths"
+
+- [ ] =T0154 STATUS=TODO TYPE=chore SCOPE=tests/lighting VERIFY="pytest -q" DESC="Add lighting test package scaffolding and ensure pytest discovery configuration"
+
+- [ ] =T0155 STATUS=TODO TYPE=feat SCOPE=helpers/lighting/pixel_strips_validators.py VERIFY="pytest -q" DESC="Add validators for pixel strip raw docs covering schema version- [ ] s uniqueness pixel count match and endpoint fields"
+
+- [ ] =T0156 STATUS=TODO TYPE=test SCOPE=tests/lighting/test_pixel_strips_validators.py VERIFY="pytest -q" DESC="Add tests for pixel strip validators including invalid RGB triplets brightness bounds endpoint parsing and duplicate- [ ] s"
 ---
 
 ## Completion rule
