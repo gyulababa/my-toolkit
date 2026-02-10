@@ -1,4 +1,4 @@
-# preview_vision/config_io.py
+# examples/preview_vision/config_io.py
 # Load + validate a vision capture config (source driver + params), then build a FrameSource via driver registry.
 
 from __future__ import annotations
@@ -52,6 +52,6 @@ def build_preview_wiring() -> tuple[VisionConfigLoader, CaptureConfigBuilder, Fr
     """
     Return the config IO wiring for preview apps.
 
-    This keeps config IO ownership in preview_vision and allows services to use injection.
+    This keeps config IO ownership in examples.preview_vision and allows services to use injection.
     """
     return load_vision_config, capture_config_from_vision, build_source_from_config

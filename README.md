@@ -28,7 +28,7 @@ my-toolkit/
 |-- helpers/          # Pure, reusable building blocks (lowest level)
 |-- services/         # Reusable orchestration / domain services (mid level)
 |-- tests/            # Toolkit-level tests (mirror helpers + services)
-|-- preview_vision/   # Local preview app (example usage)
+|-- examples/preview_vision/   # Local preview app (example usage)
 |-- README.md
 |-- HELPERS_API.md
 `-- pyproject.toml

@@ -1,4 +1,4 @@
-# preview_vision/main_dpg.py
+# examples/preview_vision/main_dpg.py
 # DearPyGui preview app (thin wiring layer): UI layout + button wiring + per-frame pump.
 # Updated to use StageSurface + ViewportCompositor (drawlist-based) so video fits on window resize.
 
@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any, Dict
 
 from helpers.runtime.optional_imports import require
-from preview_vision.config_io import build_preview_wiring
+from examples.preview_vision.config_io import build_preview_wiring
 from services.vision.preview_session import VisionPreviewSession
 
 from app.adapters.dearpygui.vision.stage_surface import StageSurface, StageSurfaceSpec
@@ -21,15 +21,19 @@ from app.adapters.dearpygui.vision.viewport_compositor import ViewportCompositor
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="DearPyGui preview for helpers.vision capture sources.")
-    p.add_argument("--config", default="preview_vision/config_capture.json", help="Path to capture config JSON.")
+    p.add_argument(
+        "--config",
+        default="examples/preview_vision/config_capture.json",
+        help="Path to capture config JSON.",
+    )
     p.add_argument("--runner-fps", type=float, default=30.0, help="Runner pacing FPS (0 disables).")
     p.add_argument("--title", default="Vision Preview", help="Window title.")
     return p.parse_args()
 
 
 def _repo_root_from_this_file() -> Path:
-    # preview_vision/main_dpg.py -> repo root is parent of preview_vision/
-    return Path(__file__).resolve().parents[1]
+    # examples/preview_vision/main_dpg.py -> repo root is parent of examples/
+    return Path(__file__).resolve().parents[2]
 
 
 def _load_json(path: Path) -> Dict[str, Any]:

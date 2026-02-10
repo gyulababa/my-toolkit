@@ -1,4 +1,4 @@
-# preview_vision/catalog_seed.py
+# examples/preview_vision/catalog_seed.py
 # Reads the default JSON seeds from helpers/configs/...
 
 from __future__ import annotations
