@@ -28,8 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] =T0144 STATUS=TODO TYPE=feat SCOPE=helpers/lighting/pixel_strips_model.py VERIFY="pytest -q" DESC="Add pixel strip core model (PixelColorRGB, StripType, Endpoint) and raw seed helpers for persisted docs"
-
 - [ ] =T0145 STATUS=TODO TYPE=feat SCOPE=helpers/lighting/pixel_buffer_editor.py VERIFY="pytest -q" DESC="Implement PixelBufferEditor with create/delete/metadata/pixel edit ops using optional History push_* integration"
 
 - [ ] =T0146 STATUS=TODO TYPE=feat SCOPE=helpers/lighting/pixel_strip_ascii_debug.py VERIFY="pytest -q" DESC="Add ASCII debug preview helpers that reuse FixedStrip and strip_preview_ascii for quick headless visualization"
