@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0194 STATUS=TODO TYPE=refactor SCOPE=app/*,toolkit_adapters/*,my_toolkit/* VERIFY="pytest -q" DESC="Move toolkit app package to my_toolkit/toolkit_adapters and add minimal compatibility shim for old imports"
 - [ ] ID=T0195 STATUS=TODO TYPE=refactor SCOPE=preview_vision/*,examples/preview_vision/* VERIFY="pytest -q" DESC="Move preview_vision to examples/preview_vision and update references and entrypoints"
 - [ ] ID=T0196 STATUS=TODO TYPE=refactor SCOPE=helpers/lighting/*,helpers/led_pixels/*,my_toolkit/helpers/* VERIFY="pytest -q" DESC="Rename helpers lighting to my_toolkit.helpers.led_pixels and add compatibility import shim if required"
 - [ ] ID=T0197 STATUS=TODO TYPE=refactor SCOPE=. VERIFY="pytest -q" DESC="Update imports tests and docs to new namespaces my_toolkit toolkit_adapters and led_pixels and ensure tests pass"
