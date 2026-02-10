@@ -28,8 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] =T0152 STATUS=TODO TYPE=doc SCOPE=CODEX_PIXEL_STRIPS.md VERIFY="pytest -q" DESC="Document pixel strips schema- [ ]  and naming conventions endpoint semantics and PixelBufferEditor API contracts"
-
 - [ ] =T0153 STATUS=TODO TYPE=feat SCOPE=helpers/lighting/init.py VERIFY="pytest -q" DESC="Expose lighting public API exports for PixelBufferEditor and pixel strip model types with stable import paths"
 
 - [ ] =T0154 STATUS=TODO TYPE=chore SCOPE=tests/lighting VERIFY="pytest -q" DESC="Add lighting test package scaffolding and ensure pytest discovery configuration"
