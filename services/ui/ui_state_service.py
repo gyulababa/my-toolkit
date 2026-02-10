@@ -9,10 +9,10 @@ from helpers.catalog import EditableCatalog
 from helpers.history.history import History
 from helpers.persist.persisted_catalog_loader import PersistedCatalogLoader
 
-from helpers.toolkits.ui.spec.models import UiSpec
+from helpers.toolkits.ui.spec import UiSpec
 from helpers.toolkits.ui.state.defaults import default_ui_state_from_spec
 from helpers.toolkits.ui.state.loader import make_ui_state_catalog_loader
-from helpers.toolkits.ui.state.models import UiState
+from helpers.toolkits.ui.state import UiState
 from helpers.toolkits.ui.state.serde import ensure_ui_state, dump_ui_state
 
 
