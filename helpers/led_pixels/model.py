@@ -1,4 +1,4 @@
-# helpers/lighting/model.py
+# helpers/led_pixels/model.py
 from __future__ import annotations
 
 from dataclasses import dataclass

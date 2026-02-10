@@ -1,24 +1,7 @@
-# helpers/lighting/__init__.py
-from __future__ import annotations
+"""Compatibility shim for helpers.lighting.* imports (moved to helpers.led_pixels)."""
 
-from .pixel_buffer_editor import PixelBufferEditor
-from .pixel_strips_model import (
-    Endpoint,
-    PixelColorRGB,
-    StripType,
-    apply_master_brightness_to_rgb_triplet,
-    normalize_master_brightness,
-    seed_pixel_strips_doc,
-    seed_strip_raw,
-)
+from importlib import import_module as _import_module
+import sys as _sys
 
-__all__ = [
-    "Endpoint",
-    "PixelBufferEditor",
-    "PixelColorRGB",
-    "StripType",
-    "apply_master_brightness_to_rgb_triplet",
-    "normalize_master_brightness",
-    "seed_pixel_strips_doc",
-    "seed_strip_raw",
-]
+_led_pixels = _import_module("helpers.led_pixels")
+_sys.modules[__name__] = _led_pixels

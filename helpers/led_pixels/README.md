@@ -1,5 +1,5 @@
-<!-- helpers/lighting/README.md -->
-helpers/lighting
+<!-- helpers/led_pixels/README.md -->
+helpers/led_pixels
 Purpose
 
 Lighting domain helpers for pixel strip data models, validation, and edit operations. This layer is frontend-agnostic and protocol-agnostic.

@@ -1,4 +1,4 @@
-# helpers/lighting/pixel_strips_model.py
+# helpers/led_pixels/pixel_strips_model.py
 from __future__ import annotations
 
 from dataclasses import dataclass
