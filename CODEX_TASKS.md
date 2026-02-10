@@ -28,8 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] =T0007 STATUS=TODO TYPE=chore SCOPE=app/sqlite/ VERIFY="pytest -q" DESC="Review untracked app/sqlite/ contents: summarize purpose, decide keep vs delete vs ignore; if keep, add minimal docs/README and ensure no large/derived artifacts are committed"
-
 - [ ] =T0008 STATUS=TODO TYPE=chore SCOPE=helpers/lighting/,ops_refresh.py VERIFY="pytest -q" DESC="Review untracked helpers/lighting/ and ops_refresh.py: summarize intent, determine correct layer/ownership, and either integrate (add init/typing/tests if needed) or remove/ignore; commit only if within intended architecture"
 
 - [ ] =T0144 STATUS=TODO TYPE=feat SCOPE=helpers/lighting/pixel_strips_model.py VERIFY="pytest -q" DESC="Add pixel strip core model (PixelColorRGB, StripType, Endpoint) and raw seed helpers for persisted docs"
