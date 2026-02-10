@@ -28,11 +28,14 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0193 STATUS=TODO TYPE=refactor SCOPE=pyproject.toml,my_toolkit/*,helpers/*,services/* VERIFY="pytest -q" DESC="Create my_toolkit/ import root and add compatibility shims for helpers/ and services/; update pyproject package discovery to include my_toolkit* and services*"
-- [ ] ID=T0194 STATUS=TODO TYPE=refactor SCOPE=app/*,toolkit_adapters/*,my_toolkit/* VERIFY="pytest -q" DESC="Move/rename toolkit app/ package to my_toolkit/toolkit_adapters/ (avoid top-level app namespace); add minimal compat shim if needed"
-- [ ] ID=T0195 STATUS=TODO TYPE=refactor SCOPE=preview_vision/*,examples/preview_vision/* VERIFY="pytest -q" DESC="Move preview_vision/ to repo examples/preview_vision/ (not packaged) and update any references/entrypoints accordingly"
-- [ ] ID=T0196 STATUS=TODO TYPE=refactor SCOPE=helpers/lighting/*,helpers/led_pixels/*,my_toolkit/helpers/* VERIFY="pytest -q" DESC="Rename helpers/lighting to my_toolkit/helpers/led_pixels (LED pixel strips, not monitor pixels); add compat import shim if required"
-- [ ] ID=T0197 STATUS=TODO TYPE=refactor SCOPE=. VERIFY="pytest -q" DESC="Update imports, tests, and docs to new namespaces (my_toolkit.*, toolkit_adapters.*, led_pixels); ensure pytest -q passes and docs reflect new layout"
+- [ ] ID=T0194 STATUS=TODO TYPE=refactor SCOPE=app/*,toolkit_adapters/*,my_toolkit/* VERIFY="pytest -q" DESC="Move toolkit app package to my_toolkit/toolkit_adapters and add minimal compatibility shim for old imports"
+- [ ] ID=T0195 STATUS=TODO TYPE=refactor SCOPE=preview_vision/*,examples/preview_vision/* VERIFY="pytest -q" DESC="Move preview_vision to examples/preview_vision and update references and entrypoints"
+- [ ] ID=T0196 STATUS=TODO TYPE=refactor SCOPE=helpers/lighting/*,helpers/led_pixels/*,my_toolkit/helpers/* VERIFY="pytest -q" DESC="Rename helpers lighting to my_toolkit.helpers.led_pixels and add compatibility import shim if required"
+- [ ] ID=T0197 STATUS=TODO TYPE=refactor SCOPE=. VERIFY="pytest -q" DESC="Update imports tests and docs to new namespaces my_toolkit toolkit_adapters and led_pixels and ensure tests pass"
+- [ ] ID=T0198 STATUS=TODO TYPE=chore SCOPE=.gitignore VERIFY="pytest -q" DESC="Add ignore rule for my_toolkit.egg-info to keep editable install artifacts out of version control"
+- [ ] ID=T0199 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/spec/models.py VERIFY="pytest -q" DESC="Resolve unexpected modification to spec models by reverting or accepting with reviewed imports and README updates"
+- [ ] ID=T0200 STATUS=TODO TYPE=refactor SCOPE=**/__init__.py VERIFY="pytest -q" DESC="Audit added or modified __init__ modules for correct exports imports and layering compliance"
+
 
 ---
 
