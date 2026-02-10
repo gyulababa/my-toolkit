@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0181 STATUS=TODO TYPE=refactor SCOPE=helpers/toolkits/ui/state/migrate.py VERIFY="pytest -q" DESC="Review accidental addition in ui state migrate helper; accept or adjust imports/contract usage and document impacts if needed"
 
 ---
 
