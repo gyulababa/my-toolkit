@@ -28,7 +28,6 @@ Roadmap items live in CODEX_FUTURE_PLANS.md and are NOT executed unless explicit
 
 ## Task Registry
 
-- [ ] ID=T0159 STATUS=TODO TYPE=refactor SCOPE=app/ VERIFY="pytest -q" DESC="Audit app folder modules for incorrect imports and fix paths to respect layering and package structure"
 
 ---
 
